@@ -11,6 +11,8 @@ export default defineConfig({
 			"@operation": "/src/bff/operation",
 			"@sessions": "/src/bff/sessions.js",
 			"@server": "/src/bff/server.js",
+			"@app": "/src/app.jsx",
+			"@components": "/src/components",
 		},
 	},
 });
