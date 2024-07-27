@@ -6,13 +6,18 @@ export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: {
-			"@api": "/src/bff/api",
 			"@utils": "/src/bff/utils",
 			"@operation": "/src/bff/operation",
-			"@sessions": "/src/bff/sessions.js",
 			"@server": "/src/bff/server.js",
 			"@app": "/src/app.jsx",
 			"@components": "/src/components",
+			"@actions": "/src/redux/actions",
+			"@redusers": "/src/redux/redusers",
+			"@store": "/src/redux/store.js",
+			"@selectors": "/src/selectors",
+			"@pages": "/src/pages",
+			"@constants": "/src/constants",
+			"@hooks": "/src/hooks",
 		},
 	},
 });

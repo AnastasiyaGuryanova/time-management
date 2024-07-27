@@ -1,5 +1,5 @@
-import { getUser } from "@api";
-import { sessions } from "@sessions";
+import { getUser } from "../api/get-user";
+import { sessions } from "../sessions";
 
 export const authorize = async (authEmail, authPassword) => {
 	const user = await getUser(authEmail);
@@ -11,9 +11,9 @@ export const authorize = async (authEmail, authPassword) => {
 		};
 	}
 
-	const { id, name, email, password } = user;
+	const { id, name, email, password, roleId, createdAt, updatedAt } = user;
 
-	if (authPassword !== user.password) {
+	if (authPassword !== password) {
 		return {
 			error: "Неверный пароль",
 			res: null,
@@ -26,7 +26,9 @@ export const authorize = async (authEmail, authPassword) => {
 			id,
 			name,
 			email,
-			password,
+			roleId,
+			createdAt,
+			updatedAt,
 			session: sessions.create(user),
 		},
 	};

@@ -1,5 +1,9 @@
+import { useLayoutEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Header } from "@components";
+import { useDispatch } from "react-redux";
+import { Header, PrivateRoute } from "@components";
+import { Autorization } from "@pages";
+import { setUser } from "@actions";
 import styled from "styled-components";
 
 const AppContent = styled.div`
@@ -25,18 +29,70 @@ const Footer = styled.div`
 `;
 
 export const App = () => {
+	const dispatch = useDispatch();
+
+	useLayoutEffect(() => {
+		const currentUserDataJSON = sessionStorage.getItem("userData");
+
+		if (!currentUserDataJSON) return;
+
+		const currentUserData = JSON.parse(currentUserDataJSON);
+
+		dispatch(
+			setUser({
+				...currentUserData,
+			}),
+		);
+	}, [dispatch]);
+
 	return (
 		<AppContent>
 			<Header />
 			<Rage>
 				<Routes>
-					<Route path="/" element={<div>Главная страница</div>} />
-					<Route path="/login" element={<div>Авторизация</div>} />
+					<Route path="/login" element={<Autorization />} />
 					<Route path="/register" element={<div>Регистрация</div>} />
-					<Route path="/projects" element={<div>Проекты</div>} />
-					<Route path="/tasks" element={<div>Задачи</div>} />
-					<Route path="/analytics" element={<div>Аналитика</div>} />
-					<Route path="/settings" element={<div>Настройки</div>} />
+
+					<Route
+						path="/"
+						element={
+							<PrivateRoute>
+								<div>Главная страница</div>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/projects"
+						element={
+							<PrivateRoute>
+								<div>Проекты</div>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/tasks"
+						element={
+							<PrivateRoute>
+								<div>Задачи</div>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/analytics"
+						element={
+							<PrivateRoute>
+								<div>Аналитика</div>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/settings"
+						element={
+							<PrivateRoute>
+								<div>Настройки</div>
+							</PrivateRoute>
+						}
+					/>
 					<Route path="*" element={<div>Ошибка</div>} />
 				</Routes>
 			</Rage>

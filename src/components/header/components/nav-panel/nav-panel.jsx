@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
-import { Button, Icon } from "./components";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "@components";
+import { selectUserSession } from "@selectors";
+import { logout } from "@actions";
 import styled from "styled-components";
 
 const NavPanelContainer = ({ className }) => {
+	const dispatch = useDispatch();
+	const session = useSelector(selectUserSession);
+
+	const onLogout = () => {
+		dispatch(logout(session));
+		sessionStorage.removeItem("userData");
+		window.location.reload();
+	};
+
 	return (
 		<div className={className}>
 			<Link to="/">
@@ -17,9 +29,11 @@ const NavPanelContainer = ({ className }) => {
 				<Button>Аналитика</Button>
 			</Link>
 
-			<Icon id="fa-cog" onClick={() => {}} />
+			<Link to="/settings">
+				<Button>Настройки</Button>
+			</Link>
 
-			<Icon id="fa-sign-out" onClick={() => {}} />
+			<Button onClick={onLogout}>Выход</Button>
 		</div>
 	);
 };
@@ -30,6 +44,12 @@ export const NavPanel = styled(NavPanelContainer)`
 
 	& :hover {
 		cursor: pointer;
+	}
+
+	& button {
+		color: ${(props) => props.theme.colors.headerButtonText};
+		background-color: ${(props) =>
+			props.theme.colors.headerButtonBackground};
 	}
 
 	& button:hover {
