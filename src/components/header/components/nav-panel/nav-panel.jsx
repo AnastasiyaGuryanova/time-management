@@ -12,7 +12,6 @@ const NavPanelContainer = ({ className }) => {
 	const onLogout = () => {
 		dispatch(logout(session));
 		sessionStorage.removeItem("userData");
-		window.location.reload();
 	};
 
 	return (

@@ -1,4 +1,4 @@
-import { getUser } from "../api/get-user";
+import { getUser } from "../api";
 import { sessions } from "../sessions";
 
 export const authorize = async (authEmail, authPassword) => {

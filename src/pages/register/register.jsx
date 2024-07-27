@@ -11,7 +11,12 @@ import { selectUserRole } from "@selectors";
 import { ROLE } from "@constants";
 import styled from "styled-components";
 
-const authFormSchema = yup.object().shape({
+const regFormSchema = yup.object().shape({
+	name: yup
+		.string()
+		.required("Имя обязательно для заполнения")
+		.min(2, "Имя должно быть не менее 2 символов")
+		.max(10, "Имя должно быть не более 10 символов"),
 	email: yup
 		.string()
 		.required("Email обязателен")
@@ -29,9 +34,13 @@ const authFormSchema = yup.object().shape({
 		)
 		.min(6, "Неверно заполнен пароль. Минимум 6 символа")
 		.max(30, "Неверно заполнен пароль. Максимум 30 символов"),
+	confirmPassword: yup
+		.string()
+		.oneOf([yup.ref("password"), null], "Пароли не совпадают")
+		.required("Повтор пароля обязателен"),
 });
 
-const AutorizationContainer = ({ className }) => {
+const RegisterContainer = ({ className }) => {
 	const {
 		register,
 		handleSubmit,
@@ -39,10 +48,12 @@ const AutorizationContainer = ({ className }) => {
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
+			name: "",
 			email: "",
 			password: "",
+			confirmPassword: "",
 		},
-		resolver: yupResolver(authFormSchema),
+		resolver: yupResolver(regFormSchema),
 	});
 
 	const [serverError, setServerError] = useState(null);
@@ -56,8 +67,8 @@ const AutorizationContainer = ({ className }) => {
 		}
 	};
 
-	const onSubmit = ({ email, password }) => {
-		server.authorize(email, password).then(({ error, res }) => {
+	const onSubmit = ({ name, email, password }) => {
+		server.register(name, email, password).then(({ error, res }) => {
 			if (error) {
 				setServerError(`Ошибка запроса: ${error}`);
 				return;
@@ -68,12 +79,18 @@ const AutorizationContainer = ({ className }) => {
 		});
 
 		reset({
+			name: "",
 			email: "",
 			password: "",
+			confirmPassword: "",
 		});
 	};
 
-	const formError = errors?.email?.message || errors?.password?.message;
+	const formError =
+		errors?.name?.message ||
+		errors?.email?.message ||
+		errors?.password?.message ||
+		errors?.confirmPassword?.message;
 
 	const errorMessage = formError || serverError;
 
@@ -84,9 +101,23 @@ const AutorizationContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="container">
-				<h2 className="title">Вход в аккаунт</h2>
+				<h2 className="title">Регистрация</h2>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
+					<div>
+						<label>Имя:</label>
+
+						<Input
+							name="name"
+							type="name"
+							placeholder="Имя..."
+							width={"550px"}
+							{...register("name", {
+								onChange: () => setServerError(null),
+							})}
+							onBlur={focusSubmitButton}
+						/>
+					</div>
 					<div>
 						<label>Email:</label>
 
@@ -115,15 +146,25 @@ const AutorizationContainer = ({ className }) => {
 							onBlur={focusSubmitButton}
 						/>
 					</div>
-					<Button
-						type="submit"
-						ref={submitButtonRef}
-						onBlur={focusSubmitButton}
-					>
-						Авторизоваться
+					<div>
+						<label>Повторите пароль:</label>
+
+						<Input
+							name="confirmPassword"
+							type="password"
+							placeholder="Повтор пароля..."
+							width={"550px"}
+							{...register("confirmPassword", {
+								onChange: () => setServerError(null),
+							})}
+							onBlur={focusSubmitButton}
+						/>
+					</div>
+					<Button type="submit" ref={submitButtonRef}>
+						Зарегистрироваться
 					</Button>
 
-					<StyledLink to="/register">Регистрация</StyledLink>
+					<StyledLink to="/login">Авторизация</StyledLink>
 
 					{errorMessage && (
 						<AuthFormError>{"*" + errorMessage}</AuthFormError>
@@ -134,7 +175,7 @@ const AutorizationContainer = ({ className }) => {
 	);
 };
 
-export const Autorization = styled(AutorizationContainer)`
+export const Register = styled(RegisterContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -145,7 +186,7 @@ export const Autorization = styled(AutorizationContainer)`
 		align-items: center;
 		flex-direction: column;
 		width: 650px;
-		height: 470px;
+		height: 650px;
 		padding: 40px;
 		border-radius: 7px;
 		border: 1px solid ${(props) => props.theme.colors.inputBorderColor};

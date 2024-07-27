@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Header, PrivateRoute, Footer } from "@components";
-import { Autorization } from "@pages";
+import { Autorization, Register } from "@pages";
 import { setUser } from "@actions";
 import styled from "styled-components";
 
@@ -45,7 +45,7 @@ export const App = () => {
 			<Rage>
 				<Routes>
 					<Route path="/login" element={<Autorization />} />
-					<Route path="/register" element={<div>Регистрация</div>} />
+					<Route path="/register" element={<Register />} />
 
 					<Route
 						path="/"

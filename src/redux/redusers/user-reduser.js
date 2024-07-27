@@ -20,7 +20,7 @@ export const userReduser = (state = initialState, action) => {
 			};
 		}
 
-		case ACTION_TYPE.LOGAUT: {
+		case ACTION_TYPE.LOGOUT: {
 			return initialState;
 		}
 
