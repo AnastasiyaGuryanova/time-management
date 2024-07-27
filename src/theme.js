@@ -8,6 +8,8 @@ const theme = {
 		headerHoverColor: "#FAD297",
 		headerActiveColor: "#FBAC44",
 
+		footerHoverColor: "#FBAC44",
+
 		pageBackground: "#fafafa",
 		pageText: "#084D63",
 		pageButtonText: "#fafafa",

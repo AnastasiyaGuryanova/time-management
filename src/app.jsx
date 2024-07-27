@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Header, PrivateRoute } from "@components";
+import { Header, PrivateRoute, Footer } from "@components";
 import { Autorization } from "@pages";
 import { setUser } from "@actions";
 import styled from "styled-components";
@@ -20,12 +20,6 @@ const Rage = styled.div`
 	width: 100%;
 	min-height: 100%;
 	padding: 44px 0;
-`;
-const Footer = styled.div`
-	width: 100%;
-	height: 60px;
-	background-color: ${(props) => props.theme.colors.headerFooterBackground};
-	color: ${(props) => props.theme.colors.headerFooterText};
 `;
 
 export const App = () => {
@@ -93,10 +87,18 @@ export const App = () => {
 							</PrivateRoute>
 						}
 					/>
+					<Route
+						path="/privacy-policy"
+						element={<div>Политика конфиденциальности</div>}
+					/>
+					<Route
+						path="/terms-of-service"
+						element={<div>Условия использования</div>}
+					/>
 					<Route path="*" element={<div>Ошибка</div>} />
 				</Routes>
 			</Rage>
-			<Footer>Подвал</Footer>
+			<Footer />
 		</AppContent>
 	);
 };
