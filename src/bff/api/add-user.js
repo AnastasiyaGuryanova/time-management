@@ -15,4 +15,4 @@ export const addUser = (name, email, password) =>
 			created_at: getCurrentDateTime(),
 			updated_at: getCurrentDateTime(),
 		}),
-	});
+	}).then((createdUser) => createdUser.json());

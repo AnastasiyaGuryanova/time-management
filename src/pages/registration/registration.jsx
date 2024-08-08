@@ -4,8 +4,8 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, AuthFormError, StyledLink } from "@components";
-import { server } from "@server";
+import { Button, Input, AuthFormError, StyledLink, H2 } from "@components";
+import { useServerRequest } from "@hooks";
 import { setUser } from "@actions";
 import { selectUserRole } from "@selectors";
 import { ROLE } from "@constants";
@@ -40,7 +40,7 @@ const regFormSchema = yup.object().shape({
 		.required("Повтор пароля обязателен"),
 });
 
-const RegisterContainer = ({ className }) => {
+const RegistrationContainer = ({ className }) => {
 	const {
 		register,
 		handleSubmit,
@@ -60,6 +60,7 @@ const RegisterContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const roleId = useSelector(selectUserRole);
 	const submitButtonRef = React.useRef(null);
+	const requestServer = useServerRequest();
 
 	const focusSubmitButton = () => {
 		if (isValid && submitButtonRef.current) {
@@ -68,15 +69,17 @@ const RegisterContainer = ({ className }) => {
 	};
 
 	const onSubmit = ({ name, email, password }) => {
-		server.register(name, email, password).then(({ error, res }) => {
-			if (error) {
-				setServerError(`Ошибка запроса: ${error}`);
-				return;
-			}
+		requestServer("register", name, email, password).then(
+			({ error, res }) => {
+				if (error) {
+					setServerError(`Ошибка запроса: ${error}`);
+					return;
+				}
 
-			dispatch(setUser(res));
-			sessionStorage.setItem("userData", JSON.stringify(res));
-		});
+				dispatch(setUser(res));
+				sessionStorage.setItem("userData", JSON.stringify(res));
+			},
+		);
 
 		reset({
 			name: "",
@@ -101,7 +104,7 @@ const RegisterContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="container">
-				<h2 className="title">Регистрация</h2>
+				<H2>Регистрация</H2>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div>
@@ -125,7 +128,7 @@ const RegisterContainer = ({ className }) => {
 							name="email"
 							type="email"
 							placeholder="Email..."
-							width={"550px"}
+							width="550px"
 							{...register("email", {
 								onChange: () => setServerError(null),
 							})}
@@ -139,7 +142,7 @@ const RegisterContainer = ({ className }) => {
 							name="password"
 							type="password"
 							placeholder="Пароль..."
-							width={"550px"}
+							width="550px"
 							{...register("password", {
 								onChange: () => setServerError(null),
 							})}
@@ -153,7 +156,7 @@ const RegisterContainer = ({ className }) => {
 							name="confirmPassword"
 							type="password"
 							placeholder="Повтор пароля..."
-							width={"550px"}
+							width="550px"
 							{...register("confirmPassword", {
 								onChange: () => setServerError(null),
 							})}
@@ -175,10 +178,11 @@ const RegisterContainer = ({ className }) => {
 	);
 };
 
-export const Register = styled(RegisterContainer)`
+export const Registration = styled(RegistrationContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 50px 0;
 	color: ${(props) => props.theme.colors.pageText};
 
 	& .container {
@@ -189,12 +193,7 @@ export const Register = styled(RegisterContainer)`
 		height: 650px;
 		padding: 40px;
 		border-radius: 7px;
-		border: 1px solid ${(props) => props.theme.colors.inputBorderColor};
-	}
-
-	& .title {
-		margin: 0 0 20px;
-		font-size: 34px;
+		border: 1px solid ${(props) => props.theme.colors.borderColor};
 	}
 
 	& form {

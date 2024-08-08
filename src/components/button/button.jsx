@@ -8,7 +8,7 @@ const ButtonContainer = forwardRef(({ className, children, ...props }, ref) => (
 ));
 
 export const Button = styled(ButtonContainer)`
-	margin-left: 20px;
+	margin: ${({ margin = "0" }) => margin};
 	padding: 16px 24px;
 	font-size: 18px;
 	font-weight: 600;

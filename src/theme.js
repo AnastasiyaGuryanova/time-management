@@ -2,13 +2,15 @@ const theme = {
 	colors: {
 		headerFooterBackground: "#084D63",
 		headerFooterText: "#fafafa",
-		headerFootersHadow: "#084D63",
+		headerFooterShadow: "#084D63",
 		headerButtonText: "#084D63",
 		headerButtonBackground: "#fafafa",
-		headerHoverColor: "#FAD297",
-		headerActiveColor: "#FBAC44",
+		headerHover: "#FBAC44",
+		headerActive: "#FAD297",
 
 		footerHoverColor: "#FBAC44",
+
+		colorTitle: "#084D63",
 
 		pageBackground: "#fafafa",
 		pageText: "#084D63",
@@ -16,8 +18,16 @@ const theme = {
 		pageButtonBackground: "#084D63",
 		pageDisabledColor: "#6C94A4",
 		pageActiveColor: "#FBAC44",
+		pageButtonHover: "#719CA4",
 
-		inputBorderColor: "#084D63",
+		iconColor: "#084D63",
+		iconColorHover: "#FBAC44",
+
+		CardCreateBackground: "#9AB4BB",
+		CardCreateBackgroundHover: "#FBAC44",
+
+		borderColor: "#084D63",
+
 		inputBackgroundActive: "#CBD5DB",
 		inputColorText: "#084D63",
 

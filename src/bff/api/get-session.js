@@ -1,4 +1,6 @@
+import { BASE_URL } from "../constants";
+
 export const getSession = async (hash) =>
-	fetch(`http://localhost:3008/sessions?hash=${hash}`)
+	fetch(`${BASE_URL}/sessions?hash=${hash}`)
 		.then((loadedSession) => loadedSession.json())
 		.then(([loadedSession]) => loadedSession);

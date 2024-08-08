@@ -4,8 +4,8 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, AuthFormError, StyledLink } from "@components";
-import { server } from "@server";
+import { Button, Input, AuthFormError, StyledLink, H2 } from "@components";
+import { useServerRequest } from "@hooks";
 import { setUser } from "@actions";
 import { selectUserRole } from "@selectors";
 import { ROLE } from "@constants";
@@ -31,7 +31,7 @@ const authFormSchema = yup.object().shape({
 		.max(30, "Неверно заполнен пароль. Максимум 30 символов"),
 });
 
-const AutorizationContainer = ({ className }) => {
+const AuthorizationContainer = ({ className }) => {
 	const {
 		register,
 		handleSubmit,
@@ -49,6 +49,7 @@ const AutorizationContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const roleId = useSelector(selectUserRole);
 	const submitButtonRef = React.useRef(null);
+	const requestServer = useServerRequest();
 
 	const focusSubmitButton = () => {
 		if (isValid && submitButtonRef.current) {
@@ -57,7 +58,7 @@ const AutorizationContainer = ({ className }) => {
 	};
 
 	const onSubmit = ({ email, password }) => {
-		server.authorize(email, password).then(({ error, res }) => {
+		requestServer("authorize", email, password).then(({ error, res }) => {
 			if (error) {
 				setServerError(`Ошибка запроса: ${error}`);
 				return;
@@ -84,7 +85,7 @@ const AutorizationContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="container">
-				<h2 className="title">Вход в аккаунт</h2>
+				<H2>Вход в аккаунт</H2>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div>
@@ -94,7 +95,7 @@ const AutorizationContainer = ({ className }) => {
 							name="email"
 							type="email"
 							placeholder="Email..."
-							width={"550px"}
+							width="550px"
 							{...register("email", {
 								onChange: () => setServerError(null),
 							})}
@@ -108,7 +109,7 @@ const AutorizationContainer = ({ className }) => {
 							name="password"
 							type="password"
 							placeholder="Пароль..."
-							width={"550px"}
+							width="550px"
 							{...register("password", {
 								onChange: () => setServerError(null),
 							})}
@@ -134,10 +135,11 @@ const AutorizationContainer = ({ className }) => {
 	);
 };
 
-export const Autorization = styled(AutorizationContainer)`
+export const Authorization = styled(AuthorizationContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 50px 0;
 	color: ${(props) => props.theme.colors.pageText};
 
 	& .container {
@@ -148,12 +150,7 @@ export const Autorization = styled(AutorizationContainer)`
 		height: 470px;
 		padding: 40px;
 		border-radius: 7px;
-		border: 1px solid ${(props) => props.theme.colors.inputBorderColor};
-	}
-
-	& .title {
-		margin: 0 0 20px;
-		font-size: 34px;
+		border: 1px solid ${(props) => props.theme.colors.borderColor};
 	}
 
 	& form {

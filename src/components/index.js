@@ -5,3 +5,8 @@ export * from "./private-route/private-route";
 export * from "./auth-form-error/auth-form-error";
 export * from "./footer/footer";
 export * from "./styled-link/styled-link";
+export * from "./project-form/project-form";
+export * from "./icon/icon";
+export * from "./card-create/card-create";
+export * from "./control-panel/control-panel";
+export * from "./h2/h2";

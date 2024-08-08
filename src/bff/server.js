@@ -1,7 +1,3 @@
-import { authorize, logout, register } from "./operation";
+import * as server from "./operations";
 
-export const server = {
-	authorize,
-	logout,
-	register,
-};
+export { server };

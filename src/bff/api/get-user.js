@@ -1,4 +1,4 @@
-import { transformUser } from "../transform-user";
+import { transformUser } from "../transformers";
 import { BASE_URL } from "../constants";
 
 export const getUser = async (emailToFind) =>

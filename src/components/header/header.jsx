@@ -25,12 +25,13 @@ export const Header = styled(HeaderContainer)`
 	width: 100%;
 	height: 100px;
 	padding: 0 50px;
-	box-shadow: 0 -2px 15px ${(props) => props.theme.colors.headerFootersHadow};
+	box-shadow: 0 -2px 15px ${(props) => props.theme.colors.headerFooterShadow};
 	background-color: ${(props) => props.theme.colors.headerFooterBackground};
 	color: ${(props) => props.theme.colors.headerFooterText};
+	overflow: hidden;
 
 	& .title {
+		margin: 0;
 		font-size: 40px;
-		font-whight: 100;
 	}
 `;

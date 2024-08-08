@@ -38,7 +38,7 @@ export const Footer = styled(FooterContainer)`
 	width: 100%;
 	height: 100px;
 	padding: 0 50px;
-	box-shadow: 0 -2px 15px ${(props) => props.theme.colors.headerFootersHadow};
+	box-shadow: 0 -2px 15px ${(props) => props.theme.colors.headerFooterShadow};
 	background-color: ${(props) => props.theme.colors.headerFooterBackground};
 	color: ${(props) => props.theme.colors.headerFooterText};
 

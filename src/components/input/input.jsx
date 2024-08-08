@@ -12,7 +12,7 @@ export const Input = styled(InputContainer)`
 	padding: 10px 15px;
 	font-size: 18px;
 	color: ${(props) => props.theme.colors.inputColorText};
-	border: 1px solid ${(props) => props.theme.colors.inputBorderColor};
+	border: 1px solid ${(props) => props.theme.colors.borderColor};
 	border-radius: 7px;
 	transition: background-color 0.3s ease;
 

@@ -3,3 +3,8 @@ export * from "./get-session";
 export * from "./delete-session";
 export * from "./add-user";
 export * from "./get-user";
+export * from "./get-projects";
+export * from "./add-project";
+export * from "./update-project";
+export * from "./get-project";
+export * from "./delete-project";
