@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Icon } from "@components";
+import { Button, Icon, Tooltip } from "@components";
 import { selectUserSession } from "@selectors";
 import { logout } from "@actions";
 import styled from "styled-components";
@@ -17,11 +17,13 @@ const NavPanelContainer = ({ className }) => {
 
 	return (
 		<div className={className}>
-			<Icon
-				id="fa-long-arrow-left"
-				onClick={() => navigate(-1)}
-				color={(props) => props.theme.colors.iconColorHeader}
-			/>
+			<Tooltip text="Назад">
+				<Icon
+					id="fa-chevron-left"
+					onClick={() => navigate(-1)}
+					color={(props) => props.theme.colors.iconColorHeader}
+				/>
+			</Tooltip>
 
 			<Link to="/">
 				<Button margin="0 0 0 20px">Главная</Button>

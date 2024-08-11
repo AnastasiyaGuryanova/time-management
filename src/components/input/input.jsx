@@ -1,14 +1,16 @@
 import { forwardRef } from "react";
 import styled from "styled-components";
 
-const InputContainer = forwardRef(({ className, width, ...props }, ref) => {
-	return <input className={className} {...props} ref={ref} />;
-});
+const InputContainer = forwardRef(
+	({ className, width, margin, ...props }, ref) => {
+		return <input className={className} {...props} ref={ref} />;
+	},
+);
 
 export const Input = styled(InputContainer)`
 	width: ${({ width = "100%" }) => width};
 	height: 44px;
-	margin: 0 0 10px 0;
+	margin: ${({ margin = "0" }) => margin};
 	padding: 10px 15px;
 	font-size: 18px;
 	color: ${(props) => props.theme.colors.inputColorText};

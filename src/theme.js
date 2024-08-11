@@ -23,8 +23,11 @@ const theme = {
 		iconColor: "#084D63",
 		iconColorHover: "#FBAC44",
 
+		tooltipColor: "#FBAC44",
+
 		CardCreateBackground: "#9AB4BB",
-		CardCreateBackgroundHover: "#FBAC44",
+		CardCreateBackgroundHover: "#084D63",
+		CardCreateColorHover: "#FBAC44",
 
 		borderColor: "#084D63",
 

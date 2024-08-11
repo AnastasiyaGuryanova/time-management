@@ -1,14 +1,13 @@
 import { getCurrentDateTime } from "../utils";
 
-export const updateProject = ({ id, title, description }) =>
-	fetch(`http://localhost:3008/projects/${id}`, {
+export const updateTask = ({ id, taskText }) =>
+	fetch(`http://localhost:3008/tasks/${id}`, {
 		method: "PATCH",
 		headers: {
 			"Content-Type": "application/json;charset=utf-8",
 		},
 		body: JSON.stringify({
-			title,
-			description,
+			task_text: taskText,
 			updated_at: getCurrentDateTime(),
 		}),
-	}).then((loadedProject) => loadedProject.json());
+	}).then((loadedTask) => loadedTask.json());

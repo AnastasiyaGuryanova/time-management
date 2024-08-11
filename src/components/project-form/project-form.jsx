@@ -50,13 +50,17 @@ const ProjectFormContainer = ({
 
 	return (
 		<div className={className}>
-			<Input
-				value={titleValue}
-				placeholder="Название ..."
-				onChange={onTitleChange}
-			/>
+			<div className="container">
+				<p>Название проекта:</p>
+				<Input
+					value={titleValue}
+					placeholder="Название ..."
+					margin="0 0 10px 0"
+					onChange={onTitleChange}
+				/>
+			</div>
 
-			<div className="container-description">
+			<div className="container">
 				<p>Описание проекта:</p>
 				<div
 					ref={descriptionRef}
@@ -87,7 +91,7 @@ export const ProjectForm = styled(ProjectFormContainer)`
 	width: 100%;
 	color: ${(props) => props.theme.colors.pageText};
 
-	& .container-description {
+	& .container {
 		width: 100%;
 
 		> p {
@@ -96,7 +100,7 @@ export const ProjectForm = styled(ProjectFormContainer)`
 	}
 
 	& .description {
-		min-height: 200px;
+		min-height: 170px;
 		font-size: 18px;
 		width: 100%;
 		padding: 10px;

@@ -7,18 +7,12 @@ export const useServerRequest = () => {
 	const session = useSelector(selectUserSession);
 
 	return useCallback(
-		async (operation, ...params) => {
-			const requiresSession =
-				operation !== "register" &&
-				operation !== "authorize" &&
-				operation !== "fetchProject" &&
-				operation !== "removeProject";
+		(operation, ...params) => {
+			if (server[operation].length > params.length) {
+				return server[operation](session, ...params);
+			}
 
-			const requestParams = requiresSession
-				? [session, ...params]
-				: params;
-
-			return server[operation](...requestParams);
+			return server[operation](...params);
 		},
 		[session],
 	);

@@ -1,11 +1,15 @@
-import { Icon } from "../icon/icon";
+import { Icon, Tooltip } from "@components";
 import styled from "styled-components";
 
 const ControlPanelContainer = ({ className, onRemove, onEdit }) => {
 	return (
 		<div className={className}>
-			<Icon id="fa-trash" margin="0 15px 0 0" onClick={onRemove} />
-			<Icon id="fa-pencil" onClick={onEdit} />
+			<Tooltip text="Удалить">
+				<Icon id="fa-trash" margin="0 15px 0 0" onClick={onRemove} />
+			</Tooltip>
+			<Tooltip text="Изменить">
+				<Icon id="fa-pencil" onClick={onEdit} />
+			</Tooltip>
 		</div>
 	);
 };

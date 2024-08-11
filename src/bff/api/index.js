@@ -8,3 +8,7 @@ export * from "./add-project";
 export * from "./update-project";
 export * from "./get-project";
 export * from "./delete-project";
+export * from "./get-tasks";
+export * from "./add-task";
+export * from "./update-task";
+export * from "./delete-task";

@@ -95,6 +95,7 @@ const AuthorizationContainer = ({ className }) => {
 							name="email"
 							type="email"
 							placeholder="Email..."
+							margin="0 0 10px 0"
 							width="550px"
 							{...register("email", {
 								onChange: () => setServerError(null),
@@ -109,6 +110,7 @@ const AuthorizationContainer = ({ className }) => {
 							name="password"
 							type="password"
 							placeholder="Пароль..."
+							margin="0 0 10px 0"
 							width="550px"
 							{...register("password", {
 								onChange: () => setServerError(null),

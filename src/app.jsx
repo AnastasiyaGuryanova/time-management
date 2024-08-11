@@ -82,13 +82,14 @@ export const App = () => {
 					}
 				/>
 				<Route
-					path="/tasks"
+					path="/project/:id/tasks"
 					element={
 						<PrivateRoute>
-							<div>Задачи</div>
+							<Project />
 						</PrivateRoute>
 					}
 				/>
+
 				<Route
 					path="/analytics"
 					element={

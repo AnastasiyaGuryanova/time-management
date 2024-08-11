@@ -114,7 +114,8 @@ const RegistrationContainer = ({ className }) => {
 							name="name"
 							type="name"
 							placeholder="Имя..."
-							width={"550px"}
+							width="550px"
+							margin="0 0 10px 0"
 							{...register("name", {
 								onChange: () => setServerError(null),
 							})}
@@ -129,6 +130,7 @@ const RegistrationContainer = ({ className }) => {
 							type="email"
 							placeholder="Email..."
 							width="550px"
+							margin="0 0 10px 0"
 							{...register("email", {
 								onChange: () => setServerError(null),
 							})}
@@ -143,6 +145,7 @@ const RegistrationContainer = ({ className }) => {
 							type="password"
 							placeholder="Пароль..."
 							width="550px"
+							margin="0 0 10px 0"
 							{...register("password", {
 								onChange: () => setServerError(null),
 							})}
@@ -157,6 +160,7 @@ const RegistrationContainer = ({ className }) => {
 							type="password"
 							placeholder="Повтор пароля..."
 							width="550px"
+							margin="0 0 10px 0"
 							{...register("confirmPassword", {
 								onChange: () => setServerError(null),
 							})}
