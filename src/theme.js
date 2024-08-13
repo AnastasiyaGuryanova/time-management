@@ -34,6 +34,9 @@ const theme = {
 		inputBackgroundActive: "#CBD5DB",
 		inputColorText: "#084D63",
 
+		selectColorText: "#084D63",
+		selectBackgroundActive: "#CBD5DB",
+
 		authFormColorText: "#ff0000",
 	},
 };

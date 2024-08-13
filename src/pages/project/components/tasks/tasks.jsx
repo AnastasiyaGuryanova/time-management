@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useServerRequest } from "@hooks";
-import { loadTasksAsync } from "@actions";
+import { loadTasksProjectAsync } from "@actions";
 import { selectTasks } from "@selectors";
 import { Task } from "./components";
 import styled from "styled-components";
@@ -12,8 +12,8 @@ const TasksContainer = ({ className, projectId }) => {
 	const requestServer = useServerRequest();
 
 	useEffect(() => {
-		dispatch(loadTasksAsync(requestServer, projectId));
-	}, [dispatch, requestServer, tasks, projectId]);
+		dispatch(loadTasksProjectAsync(requestServer, projectId));
+	}, [dispatch, requestServer, projectId]);
 
 	return (
 		<div className={className}>

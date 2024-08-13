@@ -4,7 +4,7 @@ import { userReduser, projectReduser, taskReduser } from "@redusers";
 
 const reduser = combineReducers({
 	user: userReduser,
-	project: projectReduser,
+	projects: projectReduser,
 	tasks: taskReduser,
 });
 

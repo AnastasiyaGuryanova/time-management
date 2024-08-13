@@ -15,7 +15,7 @@ const ProjectFormContainer = ({
 	const navigate = useNavigate();
 	const requestServer = useServerRequest();
 
-	const [titleValue, setTitleValue] = useState(title);
+	const [titleValue, setTitleValue] = useState(title || "");
 	const descriptionRef = useRef(null);
 
 	useLayoutEffect(() => {

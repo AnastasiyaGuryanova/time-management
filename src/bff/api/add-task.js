@@ -1,6 +1,6 @@
 import { getCurrentDateTime } from "../utils";
 
-export const addTask = ({ projectId, taskText }) =>
+export const addTask = (userId, { projectId, taskText }) =>
 	fetch("http://localhost:3008/tasks", {
 		method: "POST",
 		headers: {
@@ -8,6 +8,7 @@ export const addTask = ({ projectId, taskText }) =>
 		},
 		body: JSON.stringify({
 			project_id: projectId,
+			user_id: userId,
 			task_text: taskText,
 			created_at: getCurrentDateTime(),
 		}),

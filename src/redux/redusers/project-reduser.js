@@ -1,12 +1,15 @@
 import { ACTION_TYPE } from "@actions";
 
 const initialProjectState = {
-	id: "",
-	userId: "",
-	title: "",
-	description: "",
-	createdAt: "",
-	updatedAt: "",
+	projects: [],
+	currentProject: {
+		id: "",
+		userId: "",
+		title: "",
+		description: "",
+		createdAt: "",
+		updatedAt: "",
+	},
 };
 
 export const projectReduser = (state = initialProjectState, action) => {
@@ -14,10 +17,29 @@ export const projectReduser = (state = initialProjectState, action) => {
 		case ACTION_TYPE.SET_PROJECT_DATA:
 			return {
 				...state,
-				...action.payload,
+				currentProject: {
+					...state.currentProject,
+					...action.payload,
+				},
+			};
+		case ACTION_TYPE.SET_PROJECTS_DATA:
+			return {
+				...state,
+				projects: action.payload,
 			};
 		case ACTION_TYPE.RESET_PROJECT_DATA:
-			return initialProjectState;
+			return {
+				...state,
+				currentProject: initialProjectState.currentProject,
+			};
+
+		case ACTION_TYPE.REMOVE_PROJECT_SUCCESS:
+			return {
+				...state,
+				projects: state.projects.filter(
+					(project) => project.id !== action.payload.id,
+				),
+			};
 
 		default:
 			return state;

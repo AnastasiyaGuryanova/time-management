@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { loadProjectsAsync } from "@actions";
+import { selectProjects } from "@selectors";
 import { useServerRequest } from "@hooks";
 import { CardCreate, H2 } from "@components";
 import { ProjectCard } from "./components";
 import styled from "styled-components";
 
 const AllProjectsPageContainer = ({ className }) => {
-	const [projects, setProjects] = useState([]);
-
+	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
+	const projects = useSelector(selectProjects);
 
 	useEffect(() => {
-		requestServer("fetchProjects").then(({ res }) => {
-			setProjects(res);
-		});
-	}, [requestServer, projects]);
+		dispatch(loadProjectsAsync(requestServer));
+	}, [dispatch, requestServer]);
 
 	return (
 		<div className={className}>

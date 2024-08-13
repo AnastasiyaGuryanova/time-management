@@ -5,6 +5,7 @@ export * from "./fetch-projects";
 export * from "./fetch-project";
 export * from "./save-project";
 export * from "./remove-project";
-export * from "./fetch-tasks";
+export * from "./fetch-tasks-project";
 export * from "./save-task";
 export * from "./remove-task";
+export * from "./fetch-tasks-all-projects";

@@ -1,8 +1,19 @@
 import { useLayoutEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
+	Tooltip,
+	Legend,
+	ArcElement,
+} from "chart.js";
 import { Header, PrivateRoute, Footer } from "@components";
 import {
+	Analytics,
 	Authorization,
 	Registration,
 	AllProjectsPage,
@@ -11,6 +22,16 @@ import {
 } from "@pages";
 import { setUser } from "@actions";
 import styled from "styled-components";
+
+ChartJS.register(
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
+	Tooltip,
+	Legend,
+	ArcElement,
+);
 
 const AppContent = styled.div`
 	display: flex;
@@ -94,7 +115,7 @@ export const App = () => {
 					path="/analytics"
 					element={
 						<PrivateRoute>
-							<div>Аналитика</div>
+							<Analytics />
 						</PrivateRoute>
 					}
 				/>

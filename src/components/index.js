@@ -11,3 +11,4 @@ export * from "./card-create/card-create";
 export * from "./control-panel/control-panel";
 export * from "./h2/h2";
 export * from "./tooltip/tooltip";
+export * from "./select/select";

@@ -14,10 +14,11 @@ export default defineConfig({
 			"@actions": "/src/redux/actions",
 			"@redusers": "/src/redux/redusers",
 			"@store": "/src/redux/store.js",
-			"@selectors": "/src/selectors",
+			"@selectors": "/src/redux/selectors",
 			"@pages": "/src/pages",
 			"@constants": "/src/constants",
 			"@hooks": "/src/hooks",
+			"@helpers": "/src/helpers",
 		},
 	},
 });
