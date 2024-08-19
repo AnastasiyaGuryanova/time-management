@@ -1,5 +1,5 @@
-import { ACTION_TYPE } from "@actions";
-import { ROLE } from "@constants";
+import { ACTION_TYPE } from '@actions';
+import { ROLE } from '@constants';
 
 const initialState = {
 	id: null,

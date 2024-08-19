@@ -1,5 +1,5 @@
-import { Icon } from "../icon/icon";
-import styled from "styled-components";
+import { Icon } from '../icon/icon';
+import styled from 'styled-components';
 
 const CardCreateContainer = ({ className, children, ...props }) => {
 	return (
@@ -19,7 +19,7 @@ export const CardCreate = styled(CardCreateContainer)`
 	border-radius: 8px;
 	padding: 30px;
 	cursor: pointer;
-	background-color: ${(props) => props.theme.colors.CardCreateBackground};
+	background-color: ${(props) => props.theme.colors.cardCreateBackground};
 	transition: background-color 0.3s ease;
 	transition: color 0.3s ease;
 
@@ -34,11 +34,10 @@ export const CardCreate = styled(CardCreateContainer)`
 	}
 
 	&:hover {
-		background-color: ${(props) =>
-			props.theme.colors.CardCreateBackgroundHover};
-		color: ${(props) => props.theme.colors.CardCreateColorHover};
+		background-color: ${(props) => props.theme.colors.cardCreateBackgroundHover};
+		color: ${(props) => props.theme.colors.cardCreateColorHover};
 		i {
-			color: ${(props) => props.theme.colors.CardCreateColorHover};
+			color: ${(props) => props.theme.colors.cardCreateColorHover};
 		}
 	}
 `;

@@ -1,6 +1,6 @@
-import { useLayoutEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useLayoutEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -10,8 +10,8 @@ import {
 	Tooltip,
 	Legend,
 	ArcElement,
-} from "chart.js";
-import { Header, PrivateRoute, Footer } from "@components";
+} from 'chart.js';
+import { BackArrow, Header, PrivateRoute, Footer, Modal } from '@components';
 import {
 	Analytics,
 	Authorization,
@@ -19,9 +19,12 @@ import {
 	AllProjectsPage,
 	NewProject,
 	Project,
-} from "@pages";
-import { setUser } from "@actions";
-import styled from "styled-components";
+	SettingsPage,
+} from '@pages';
+import { setUser, setTheme } from '@actions';
+import { selectTheme } from '@selectors';
+import { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
 ChartJS.register(
 	CategoryScale,
@@ -38,6 +41,7 @@ const AppContent = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	position: relative;
 	width: 100%;
 	min-height: 100%;
 	margin: 0 auto;
@@ -46,9 +50,17 @@ const AppContent = styled.div`
 
 export const App = () => {
 	const dispatch = useDispatch();
+	const currentTheme = useSelector(selectTheme);
 
 	useLayoutEffect(() => {
-		const currentUserDataJSON = sessionStorage.getItem("userData");
+		const savedThemeJSON = localStorage.getItem('appTheme');
+
+		if (savedThemeJSON) {
+			const savedTheme = JSON.parse(savedThemeJSON);
+			dispatch(setTheme(savedTheme));
+		}
+
+		const currentUserDataJSON = sessionStorage.getItem('userData');
 
 		if (!currentUserDataJSON) return;
 
@@ -62,83 +74,96 @@ export const App = () => {
 	}, [dispatch]);
 
 	return (
-		<AppContent>
-			<Header />
+		<ThemeProvider theme={currentTheme}>
+			<AppContent>
+				<Header />
+				<BackArrow />
 
-			<Routes>
-				<Route path="/login" element={<Authorization />} />
-				<Route path="/register" element={<Registration />} />
+				<Routes>
+					<Route path="/login" element={<Authorization />} />
+					<Route path="/register" element={<Registration />} />
 
-				<Route
-					path="/"
-					element={
-						<PrivateRoute>
-							<div>Главная страница</div>
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path="/projects"
-					element={
-						<PrivateRoute>
-							<AllProjectsPage />
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path="/project/new"
-					element={
-						<PrivateRoute>
-							<NewProject />
-						</PrivateRoute>
-					}
-				/>
+					<Route
+						path="/"
+						element={
+							<PrivateRoute>
+								<div>Главная страница</div>
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/projects"
+						element={
+							<PrivateRoute>
+								<AllProjectsPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/project/new"
+						element={
+							<PrivateRoute>
+								<NewProject />
+							</PrivateRoute>
+						}
+					/>
 
-				<Route
-					path="/project/:id"
-					element={
-						<PrivateRoute>
-							<Project />
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path="/project/:id/tasks"
-					element={
-						<PrivateRoute>
-							<Project />
-						</PrivateRoute>
-					}
-				/>
+					<Route
+						path="/project/:id"
+						element={
+							<PrivateRoute>
+								<Project />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/project/:id/tasks"
+						element={
+							<PrivateRoute>
+								<Project />
+							</PrivateRoute>
+						}
+					/>
 
-				<Route
-					path="/analytics"
-					element={
-						<PrivateRoute>
-							<Analytics />
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path="/settings"
-					element={
-						<PrivateRoute>
-							<div>Настройки</div>
-						</PrivateRoute>
-					}
-				/>
-				<Route
-					path="/privacy-policy"
-					element={<div>Политика конфиденциальности</div>}
-				/>
-				<Route
-					path="/terms-of-service"
-					element={<div>Условия использования</div>}
-				/>
-				<Route path="*" element={<div>Ошибка</div>} />
-			</Routes>
+					<Route
+						path="/analytics"
+						element={
+							<PrivateRoute>
+								<Analytics />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/settings"
+						element={
+							<PrivateRoute>
+								<SettingsPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/settings/user-edit"
+						element={
+							<PrivateRoute>
+								<SettingsPage />
+							</PrivateRoute>
+						}
+					/>
 
-			<Footer />
-		</AppContent>
+					<Route
+						path="/privacy-policy"
+						element={<div>Политика конфиденциальности</div>}
+					/>
+					<Route
+						path="/terms-of-service"
+						element={<div>Условия использования</div>}
+					/>
+					<Route path="*" element={<div>Ошибка</div>} />
+				</Routes>
+
+				<Footer />
+				<Modal />
+			</AppContent>
+		</ThemeProvider>
 	);
 };

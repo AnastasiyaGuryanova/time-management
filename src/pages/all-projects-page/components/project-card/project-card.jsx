@@ -1,17 +1,11 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ControlPanel } from "@components";
-import { removeProjectAsync } from "@actions";
-import { useServerRequest } from "@hooks";
-import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ControlPanel } from '@components';
+import { removeProjectAsync } from '@actions';
+import { useServerRequest } from '@hooks';
+import styled from 'styled-components';
 
-const ProjectCardContainer = ({
-	className,
-	id,
-	title,
-	description,
-	createdAt,
-}) => {
+const ProjectCardContainer = ({ className, id, title, description, createdAt }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const requestServer = useServerRequest();
@@ -42,7 +36,9 @@ const ProjectCardContainer = ({
 export const ProjectCard = styled(ProjectCardContainer)`
 	flex: 1 1 calc(33% - 20px);
 	max-width: 710px;
+	min-width: 350px;
 	height: 230px;
+	background-color: ${(props) => props.theme.colors.projectCardBackground};
 	border: 1px solid ${(props) => props.theme.colors.borderColor};
 	border-radius: 8px;
 	padding: 15px 15px;

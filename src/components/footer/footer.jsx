@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const FooterLinks = styled.div`
 	display: flex;
@@ -15,12 +15,9 @@ const FooterContainer = ({ className }) => {
 				<Link to="/terms-of-service">Условия использования</Link>
 			</FooterLinks>
 			<div>
+				<div>© {new Date().getFullYear()} MyApp. Все права защищены.</div>
 				<div>
-					© {new Date().getFullYear()} MyApp. Все права защищены.
-				</div>
-				<div>
-					Эта информация может быть изменена без предварительного
-					уведомления.
+					Эта информация может быть изменена без предварительного уведомления.
 				</div>
 
 				<a href="mailto:guryanova.anastasi@gmail.com">
@@ -46,6 +43,6 @@ export const Footer = styled(FooterContainer)`
 
 	a:hover {
 		text-decoration: underline;
-		color: ${(props) => props.theme.colors.footerHoverColor};
+		color: ${(props) => props.theme.colors.mainHover};
 	}
 `;

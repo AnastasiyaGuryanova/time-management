@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Input, Button, Select } from "@components";
-import styled from "styled-components";
+import { useState } from 'react';
+import { Input, Button, Select } from '@components';
+import styled from 'styled-components';
 
 const FiltersContainer = ({ projects, onApplyFilters, className }) => {
-	const [dateFrom, setDateFrom] = useState("");
-	const [dateTo, setDateTo] = useState("");
-	const [selectedProject, setSelectedProject] = useState("");
+	const [dateFrom, setDateFrom] = useState('');
+	const [dateTo, setDateTo] = useState('');
+	const [selectedProject, setSelectedProject] = useState('');
 
 	const handleApplyFilters = () => {
 		onApplyFilters({
@@ -51,7 +51,7 @@ const FiltersContainer = ({ projects, onApplyFilters, className }) => {
 				</Select>
 			</label>
 
-			<Button margin="0 0 0 20px" onClick={handleApplyFilters}>
+			<Button margin="0 0 0 30px" onClick={handleApplyFilters}>
 				Применить фильтры
 			</Button>
 		</div>
@@ -62,7 +62,9 @@ export const Filters = styled(FiltersContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	width: 100%;
 	padding: 20px;
+	background-color: ${(props) => props.theme.colors.analiticsComponentBackground};
 	border: 1px solid ${(props) => props.theme.colors.borderColor};
 	border-radius: 7px;
 

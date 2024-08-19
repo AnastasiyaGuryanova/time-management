@@ -1,21 +1,18 @@
-import { useState, useLayoutEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Button, Input } from "@components";
-import { saveProjectAsync } from "@actions";
-import { useServerRequest } from "@hooks";
-import { sanitizeContent } from "./utils";
-import styled from "styled-components";
+import { useState, useLayoutEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Button, Input } from '@components';
+import { saveProjectAsync } from '@actions';
+import { useServerRequest } from '@hooks';
+import { sanitizeContent } from './utils';
+import styled from 'styled-components';
 
-const ProjectFormContainer = ({
-	project: { id, title, description },
-	className,
-}) => {
+const ProjectFormContainer = ({ project: { id, title, description }, className }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const requestServer = useServerRequest();
 
-	const [titleValue, setTitleValue] = useState(title || "");
+	const [titleValue, setTitleValue] = useState(title || '');
 	const descriptionRef = useRef(null);
 
 	useLayoutEffect(() => {
@@ -27,9 +24,7 @@ const ProjectFormContainer = ({
 	};
 
 	const onSave = () => {
-		const newDescription = sanitizeContent(
-			descriptionRef.current.innerHTML,
-		);
+		const newDescription = sanitizeContent(descriptionRef.current.innerHTML);
 
 		if (titleValue && newDescription) {
 			dispatch(
@@ -40,12 +35,12 @@ const ProjectFormContainer = ({
 				}),
 			).then(() => navigate(`/projects`));
 		} else {
-			alert("Заполните все поля");
+			alert('Заполните все поля');
 		}
 	};
 
 	const handleCancel = () => {
-		navigate("/projects");
+		navigate('/projects');
 	};
 
 	return (
@@ -89,7 +84,7 @@ export const ProjectForm = styled(ProjectFormContainer)`
 	justify-content: space-between;
 	max-width: 1000px;
 	width: 100%;
-	color: ${(props) => props.theme.colors.pageText};
+	color: ${(props) => props.theme.colors.mainText};
 
 	& .container {
 		width: 100%;
@@ -104,21 +99,18 @@ export const ProjectForm = styled(ProjectFormContainer)`
 		font-size: 18px;
 		width: 100%;
 		padding: 10px;
+		background-color: ${(props) => props.theme.colors.textInputFieldBackground};
 		border: 1px solid ${(props) => props.theme.colors.borderColor};
 		border-radius: 7px;
 		transition: background-color 0.3s ease;
 
 		&:focus {
 			background-color: ${(props) =>
-				props.theme.colors.inputBackgroundActive};
+				props.theme.colors.textInputFieldBackgroundActive};
 		}
 	}
 
 	& .buttons {
 		margin-top: 30px;
-	}
-
-	& button:hover {
-		background-color: ${(props) => props.theme.colors.pageButtonHover};
 	}
 `;

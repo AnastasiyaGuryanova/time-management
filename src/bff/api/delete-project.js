@@ -1,4 +1,6 @@
+import { BASE_URL } from '../constants';
+
 export const deleteProject = (projectId) =>
-	fetch(`http://localhost:3008/projects/${projectId}`, {
-		method: "DELETE",
+	fetch(`${BASE_URL}/projects/${projectId}`, {
+		method: 'DELETE',
 	});

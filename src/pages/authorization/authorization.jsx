@@ -1,35 +1,15 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input, AuthFormError, StyledLink, H2 } from "@components";
-import { useServerRequest } from "@hooks";
-import { setUser } from "@actions";
-import { selectUserRole } from "@selectors";
-import { ROLE } from "@constants";
-import styled from "styled-components";
-
-const authFormSchema = yup.object().shape({
-	email: yup
-		.string()
-		.required("Email обязателен")
-		.email("Неверный формат email")
-		.matches(
-			/^[\w@.-]+$/,
-			"Неверный формат email. Допускаются только буквы, цифры и символы @ . -",
-		),
-	password: yup
-		.string()
-		.required("Пароль обязателен")
-		.matches(
-			/^[\w#%]+$/,
-			"Неверно заполнен пароль. Допускаются  буквы, цифры и знаки # %.",
-		)
-		.min(6, "Неверно заполнен пароль. Минимум 6 символа")
-		.max(30, "Неверно заполнен пароль. Максимум 30 символов"),
-});
+import { useState, useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, Input, AuthFormError, StyledLink, H2, PageComponent } from '@components';
+import { useServerRequest } from '@hooks';
+import { authSchema } from '@schemas';
+import { setUser } from '@actions';
+import { selectUserRole } from '@selectors';
+import { ROLE } from '@constants';
+import styled from 'styled-components';
 
 const AuthorizationContainer = ({ className }) => {
 	const {
@@ -39,16 +19,16 @@ const AuthorizationContainer = ({ className }) => {
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
-			email: "",
-			password: "",
+			email: '',
+			password: '',
 		},
-		resolver: yupResolver(authFormSchema),
+		resolver: yupResolver(authSchema),
 	});
 
 	const [serverError, setServerError] = useState(null);
 	const dispatch = useDispatch();
 	const roleId = useSelector(selectUserRole);
-	const submitButtonRef = React.useRef(null);
+	const submitButtonRef = useRef(null);
 	const requestServer = useServerRequest();
 
 	const focusSubmitButton = () => {
@@ -58,19 +38,19 @@ const AuthorizationContainer = ({ className }) => {
 	};
 
 	const onSubmit = ({ email, password }) => {
-		requestServer("authorize", email, password).then(({ error, res }) => {
+		requestServer('authorize', email, password).then(({ error, res }) => {
 			if (error) {
 				setServerError(`Ошибка запроса: ${error}`);
 				return;
 			}
 
 			dispatch(setUser(res));
-			sessionStorage.setItem("userData", JSON.stringify(res));
+			sessionStorage.setItem('userData', JSON.stringify(res));
 		});
 
 		reset({
-			email: "",
-			password: "",
+			email: '',
+			password: '',
 		});
 	};
 
@@ -83,7 +63,7 @@ const AuthorizationContainer = ({ className }) => {
 	}
 
 	return (
-		<div className={className}>
+		<PageComponent className={className}>
 			<div className="container">
 				<H2>Вход в аккаунт</H2>
 
@@ -97,7 +77,7 @@ const AuthorizationContainer = ({ className }) => {
 							placeholder="Email..."
 							margin="0 0 10px 0"
 							width="550px"
-							{...register("email", {
+							{...register('email', {
 								onChange: () => setServerError(null),
 							})}
 							onBlur={focusSubmitButton}
@@ -112,7 +92,7 @@ const AuthorizationContainer = ({ className }) => {
 							placeholder="Пароль..."
 							margin="0 0 10px 0"
 							width="550px"
-							{...register("password", {
+							{...register('password', {
 								onChange: () => setServerError(null),
 							})}
 							onBlur={focusSubmitButton}
@@ -128,28 +108,20 @@ const AuthorizationContainer = ({ className }) => {
 
 					<StyledLink to="/register">Регистрация</StyledLink>
 
-					{errorMessage && (
-						<AuthFormError>{"*" + errorMessage}</AuthFormError>
-					)}
+					{errorMessage && <AuthFormError>{'*' + errorMessage}</AuthFormError>}
 				</form>
 			</div>
-		</div>
+		</PageComponent>
 	);
 };
 
 export const Authorization = styled(AuthorizationContainer)`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 50px 0;
-	color: ${(props) => props.theme.colors.pageText};
-
 	& .container {
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		width: 650px;
-		height: 470px;
+		height: 490px;
 		padding: 40px;
 		border-radius: 7px;
 		border: 1px solid ${(props) => props.theme.colors.borderColor};
@@ -169,9 +141,5 @@ export const Authorization = styled(AuthorizationContainer)`
 
 	& input {
 		margin: 10px 0 20px 0;
-	}
-
-	& button:active {
-		background-color: ${(props) => props.theme.colors.pageActiveColor};
 	}
 `;

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const StyledLinkContainer = ({ className, children, ...props }) => (
 	<Link className={className} {...props}>
@@ -12,4 +12,9 @@ export const StyledLink = styled(StyledLinkContainer)`
 	text-decoration: underline;
 	margin: 20px 0 10px;
 	font-size: 18px;
+
+	&:hover {
+		text-decoration: underline;
+		color: ${(props) => props.theme.colors.mainHover};
+	}
 `;

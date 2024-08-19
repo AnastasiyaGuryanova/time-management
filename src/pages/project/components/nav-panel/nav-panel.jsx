@@ -1,6 +1,6 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { H2 } from "@components";
-import styled from "styled-components";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { H2 } from '@components';
+import styled from 'styled-components';
 
 const NavPanelContainer = ({ projectId, className }) => {
 	const navigate = useNavigate();
@@ -12,14 +12,14 @@ const NavPanelContainer = ({ projectId, className }) => {
 	return (
 		<div className={className}>
 			<H2
-				className={isProjectPage ? "active" : ""}
+				className={isProjectPage ? 'active' : ''}
 				onClick={() => navigate(`/project/${projectId}`)}
 			>
 				Проект
 			</H2>
 
 			<H2
-				className={isTasksPage ? "active" : ""}
+				className={isTasksPage ? 'active' : ''}
 				onClick={() => navigate(`/project/${projectId}/tasks`)}
 			>
 				Задачи
@@ -39,7 +39,7 @@ export const NavPanel = styled(NavPanelContainer)`
 	}
 
 	h2.active {
-		color: ${(props) => props.theme.colors.pageActiveColor};
+		color: ${(props) => props.theme.colors.mainHover};
 		text-decoration: underline;
 	}
 `;

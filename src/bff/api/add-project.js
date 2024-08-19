@@ -1,10 +1,11 @@
-import { getCurrentDateTime } from "../utils";
+import { getCurrentDateTime } from '../utils';
+import { BASE_URL } from '../constants';
 
 export const addProject = (userId, { title, description }) =>
-	fetch("http://localhost:3008/projects", {
-		method: "POST",
+	fetch(`${BASE_URL}/projects`, {
+		method: 'POST',
 		headers: {
-			"Content-Type": "application/json;charset=utf-8",
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify({
 			user_id: userId,

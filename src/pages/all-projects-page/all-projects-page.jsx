@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { loadProjectsAsync } from "@actions";
-import { selectProjects } from "@selectors";
-import { useServerRequest } from "@hooks";
-import { CardCreate, H2 } from "@components";
-import { ProjectCard } from "./components";
-import styled from "styled-components";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { loadProjectsAsync } from '@actions';
+import { selectProjects } from '@selectors';
+import { useServerRequest } from '@hooks';
+import { CardCreate, H2, PageComponent } from '@components';
+import { ProjectCard } from './components';
+import styled from 'styled-components';
 
 const AllProjectsPageContainer = ({ className }) => {
 	const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const AllProjectsPageContainer = ({ className }) => {
 	}, [dispatch, requestServer]);
 
 	return (
-		<div className={className}>
+		<PageComponent className={className}>
 			<H2>Мои проекты</H2>
 			<div className="container">
 				<Link to="/project/new" className="project-link">
@@ -35,22 +35,11 @@ const AllProjectsPageContainer = ({ className }) => {
 					/>
 				))}
 			</div>
-		</div>
+		</PageComponent>
 	);
 };
 
 export const AllProjectsPage = styled(AllProjectsPageContainer)`
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: space-between;
-	max-width: 1440px;
-	width: 100%;
-	margin: 0 auto auto;
-	padding: 50px 0;
-
-	color: ${(props) => props.theme.colors.pageText};
-
 	& .container {
 		display: flex;
 		flex-wrap: wrap;

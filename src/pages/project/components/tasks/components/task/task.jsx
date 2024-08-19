@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useServerRequest } from "@hooks";
-import { removeTaskAsync } from "@actions";
-import { ControlPanel } from "@components";
-import { TaskForm } from "../../../task-form/task-form";
-import styled from "styled-components";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useServerRequest } from '@hooks';
+import { removeTaskAsync } from '@actions';
+import { ControlPanel } from '@components';
+import { TaskForm } from '../../../task-form/task-form';
+import styled from 'styled-components';
 
 const TaskContainer = ({ task, className }) => {
 	const { id, taskText } = task;
@@ -29,10 +29,7 @@ const TaskContainer = ({ task, className }) => {
 	) : (
 		<div className={className}>
 			<div className="task">{taskText}</div>
-			<ControlPanel
-				onRemove={() => onTaskRemove(id)}
-				onEdit={onTaskEdit}
-			/>
+			<ControlPanel onRemove={() => onTaskRemove(id)} onEdit={onTaskEdit} />
 		</div>
 	);
 };
@@ -44,6 +41,7 @@ export const Task = styled(TaskContainer)`
 	width: 100%;
 	margin-top: 10px;
 	padding: 15px;
+	background-color: ${(props) => props.theme.colors.taskBackground};
 	border: 1px solid ${(props) => props.theme.colors.borderColor};
 	border-radius: 7px;
 

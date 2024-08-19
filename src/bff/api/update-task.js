@@ -1,10 +1,11 @@
-import { getCurrentDateTime } from "../utils";
+import { getCurrentDateTime } from '../utils';
+import { BASE_URL } from '../constants';
 
 export const updateTask = ({ id, taskText }) =>
-	fetch(`http://localhost:3008/tasks/${id}`, {
-		method: "PATCH",
+	fetch(`${BASE_URL}/tasks/${id}`, {
+		method: 'PATCH',
 		headers: {
-			"Content-Type": "application/json;charset=utf-8",
+			'Content-Type': 'application/json;charset=utf-8',
 		},
 		body: JSON.stringify({
 			task_text: taskText,

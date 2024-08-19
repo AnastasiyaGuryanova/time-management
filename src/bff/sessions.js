@@ -1,4 +1,4 @@
-import { addSession, getSession, deleteSession } from "./api";
+import { addSession, getSession, deleteSession, updateSession } from './api';
 
 export const sessions = {
 	create(user) {
@@ -22,5 +22,22 @@ export const sessions = {
 	async access(hash) {
 		const dbSession = await getSession(hash);
 		return dbSession;
+	},
+
+	async update(hash, id, newUserData) {
+		const session = await getSession(hash);
+
+		if (!session) {
+			throw new Error('Сессия не найдена');
+		}
+
+		const updatedUser = {
+			...session.user,
+			...newUserData,
+		};
+
+		await updateSession(id, updatedUser);
+
+		return updatedUser;
 	},
 };
