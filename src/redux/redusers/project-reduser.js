@@ -1,14 +1,14 @@
-import { ACTION_TYPE } from "@actions";
+import { ACTION_TYPE } from '@actions';
 
 const initialProjectState = {
-	projects: [],
+	projects: null,
 	currentProject: {
-		id: "",
-		userId: "",
-		title: "",
-		description: "",
-		createdAt: "",
-		updatedAt: "",
+		id: '',
+		userId: '',
+		title: '',
+		description: '',
+		createdAt: '',
+		updatedAt: '',
 	},
 };
 
@@ -36,9 +36,9 @@ export const projectReduser = (state = initialProjectState, action) => {
 		case ACTION_TYPE.REMOVE_PROJECT_SUCCESS:
 			return {
 				...state,
-				projects: state.projects.filter(
-					(project) => project.id !== action.payload.id,
-				),
+				projects: state.projects
+					? state.projects.filter((project) => project.id !== action.payload.id)
+					: null,
 			};
 
 		default:

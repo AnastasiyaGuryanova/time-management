@@ -3,13 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadTasksAllProjectsAsync, loadProjectsAsync } from '@actions';
 import { selectTasksAllProjects, selectProjects } from '@selectors';
 import { useServerRequest } from '@hooks';
-import { H2 } from '@components';
-import {
-	Filters,
-	TimeSpentBarChart,
-	TimeDistributionPieChart,
-	PageComponent,
-} from './components';
+import { H2, PageComponent, Loader } from '@components';
+import { Filters, TimeSpentBarChart, TimeDistributionPieChart } from './components';
 import { filterTasksByDate, filterTasksByProject, groupTasksByProject } from './utils';
 import styled from 'styled-components';
 
@@ -29,11 +24,13 @@ const AnalyticsContainer = ({ className }) => {
 	}, [dispatch, requestServer]);
 
 	useEffect(() => {
-		handleApplyFilters({ selectedProject: 'all' });
+		if (tasks && projects) {
+			handleApplyFilters({ selectedProject: 'all' });
+		}
 	}, [tasks, projects]);
 
 	const handleApplyFilters = (filters) => {
-		let filteredTasks = tasks;
+		let filteredTasks = tasks || [];
 		setNoTasksMessage('');
 
 		filteredTasks = filterTasksByDate(
@@ -61,6 +58,10 @@ const AnalyticsContainer = ({ className }) => {
 			}
 		}
 	};
+
+	if (projects === null || tasks === null) {
+		return <Loader />;
+	}
 
 	return (
 		<PageComponent className={className}>

@@ -44,6 +44,7 @@ export const Modal = styled(ModalContainer)`
 	right: 0;
 	bottom: 0;
 	left: 0;
+	color: ${(props) => props.theme.colors.mainText};
 
 	& .overlay {
 		position: absolute;
@@ -60,15 +61,18 @@ export const Modal = styled(ModalContainer)`
 		margin: 0 auto;
 		padding: 40px;
 		top: 50%;
-		transform: translate(0, -50%);
+		font-size: 28px;
 		background-color: ${(props) => props.theme.colors.pageBackground};
 		border: 1px solid ${(props) => props.theme.colors.borderColor};
 		border-radius: 7px;
+		transform: translate(0, -50%);
 		transition: background-color 0.3s ease;
 		z-index: 30;
 	}
 
 	& .buttons {
 		display: flex;
+		justify-content: center;
+		margin-top: 25px;
 	}
 `;

@@ -15,13 +15,18 @@ import { BackArrow, Header, PrivateRoute, Footer, Modal } from '@components';
 import {
 	Analytics,
 	Authorization,
-	Registration,
 	AllProjectsPage,
+	Registration,
 	NewProject,
+	MainPage,
 	Project,
 	SettingsPage,
+	TermsOfService,
+	PrivacyPolicy,
+	Error,
 } from '@pages';
-import { setUser, setTheme } from '@actions';
+import { ERROR } from '@constants';
+import { setUser } from '@actions';
 import { selectTheme } from '@selectors';
 import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
@@ -53,13 +58,6 @@ export const App = () => {
 	const currentTheme = useSelector(selectTheme);
 
 	useLayoutEffect(() => {
-		const savedThemeJSON = localStorage.getItem('appTheme');
-
-		if (savedThemeJSON) {
-			const savedTheme = JSON.parse(savedThemeJSON);
-			dispatch(setTheme(savedTheme));
-		}
-
 		const currentUserDataJSON = sessionStorage.getItem('userData');
 
 		if (!currentUserDataJSON) return;
@@ -87,7 +85,23 @@ export const App = () => {
 						path="/"
 						element={
 							<PrivateRoute>
-								<div>Главная страница</div>
+								<MainPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/selection"
+						element={
+							<PrivateRoute>
+								<MainPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/start/task/:id"
+						element={
+							<PrivateRoute>
+								<MainPage />
 							</PrivateRoute>
 						}
 					/>
@@ -150,15 +164,11 @@ export const App = () => {
 						}
 					/>
 
-					<Route
-						path="/privacy-policy"
-						element={<div>Политика конфиденциальности</div>}
-					/>
-					<Route
-						path="/terms-of-service"
-						element={<div>Условия использования</div>}
-					/>
-					<Route path="*" element={<div>Ошибка</div>} />
+					<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+					<Route path="/terms-of-service" element={<TermsOfService />} />
+
+					<Route path="*" element={<Error error={ERROR.PAGE_NOT_EXIST} />} />
 				</Routes>
 
 				<Footer />

@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { saveTaskAsync } from "@actions";
-import { useServerRequest } from "@hooks";
-import { Input, Icon, Tooltip } from "@components";
-import styled from "styled-components";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { saveTaskAsync } from '@actions';
+import { useServerRequest } from '@hooks';
+import { Input, Icon, Tooltip } from '@components';
+import styled from 'styled-components';
 
 const TaskFormContainer = ({ task = {}, onSaveComplete, className }) => {
-	const { id = "", taskText = "" } = task;
+	const { id = '', taskText = '' } = task;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const params = useParams();
@@ -36,7 +36,7 @@ const TaskFormContainer = ({ task = {}, onSaveComplete, className }) => {
 				navigate(`/project/${project_id}/tasks`);
 			});
 		} else {
-			alert("Введите текст задачи");
+			alert('Введите текст задачи');
 		}
 	};
 

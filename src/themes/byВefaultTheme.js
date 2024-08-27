@@ -16,6 +16,7 @@ export const byВefaultTheme = {
 		mainText: '#084D63',
 
 		iconColor: '#084D63',
+		colorTransparent: '#084D6380',
 		tooltipColor: '#FBAC44',
 
 		cardCreateBackground: '#9AB4BB',
@@ -27,6 +28,7 @@ export const byВefaultTheme = {
 		analiticsComponentBackground: '#CBDADF',
 
 		borderColor: '#084D63',
+		loaderColor: '#084D63',
 
 		textInputFieldBackground: '#EAEFF2',
 		textInputFieldBackgroundActive: '#CBD5DB',

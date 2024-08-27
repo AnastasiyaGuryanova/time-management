@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '@components';
+import { Button, Icon, Tooltip } from '@components';
 import { selectUserSession } from '@selectors';
 import { logout } from '@actions';
 import styled from 'styled-components';
@@ -32,9 +32,15 @@ const NavPanelContainer = ({ className }) => {
 				<Button margin="0 0 0 20px">Настройки</Button>
 			</Link>
 
-			<Button margin="0 0 0 20px" onClick={onLogout}>
-				Выход
-			</Button>
+			<Tooltip text="выход">
+				<Icon
+					id="fa-sign-out"
+					color={(props) => props.theme.colors.headerButtonBackground}
+					margin="0 0 5px 20px"
+					size="45px"
+					onClick={onLogout}
+				/>
+			</Tooltip>
 		</div>
 	);
 };

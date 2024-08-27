@@ -21,5 +21,3 @@ export * from './load-tasks-all-projects-async';
 export * from './set-theme';
 export * from './open-modal';
 export * from './close-modal';
-export * from './update-theme';
-export * from './save-theme-to-local-storage';

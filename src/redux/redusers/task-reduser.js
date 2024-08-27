@@ -1,17 +1,17 @@
-import { ACTION_TYPE } from "@actions";
+import { ACTION_TYPE } from '@actions';
 
 const initialTaskState = {
-	tasks: [],
-	tasksAllProjects: [],
+	tasks: null,
+	tasksAllProjects: null,
 	currentTask: {
-		id: "",
-		projectId: "",
-		taskText: "",
-		startTime: "",
-		endTime: "",
-		duration: "",
-		createdAt: "",
-		updatedAt: "",
+		id: '',
+		projectId: '',
+		taskText: null,
+		startTime: null,
+		endTime: null,
+		duration: 0,
+		createdAt: null,
+		updatedAt: null,
 	},
 };
 
@@ -43,12 +43,14 @@ export const taskReduser = (state = initialTaskState, action) => {
 		case ACTION_TYPE.REMOVE_TASK_SUCCESS:
 			return {
 				...state,
-				tasks: state.tasks.filter(
-					(task) => task.id !== action.payload.id,
-				),
-				tasksAllProjects: state.tasksAllProjects.filter(
-					(task) => task.id !== action.payload.id,
-				),
+				tasks: state.tasks
+					? state.tasks.filter((task) => task.id !== action.payload.id)
+					: null,
+				tasksAllProjects: state.tasksAllProjects
+					? state.tasksAllProjects.filter(
+							(task) => task.id !== action.payload.id,
+						)
+					: null,
 			};
 		default:
 			return state;

@@ -21,6 +21,6 @@ export const Button = styled(ButtonContainer)`
 	transition: background-color 0.3s ease;
 
 	&:hover {
-		background-color: ${(props) => props.theme.colors.mainHover};
+		background-color: ${(props) => !props.disabled && props.theme.colors.mainHover};
 	}
 `;

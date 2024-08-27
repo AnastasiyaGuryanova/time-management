@@ -27,6 +27,7 @@ export const darkTheme = {
 		cardCreateColorHover: '#FBAC44',
 
 		borderColor: '#393939',
+		loaderColor: '#393939',
 
 		textInputFieldBackground: '#BCBCC5',
 		textInputFieldBackgroundActive: '#A9A9A9',
