@@ -1,9 +1,8 @@
 import { useMatch } from 'react-router-dom';
 import { PageComponent } from '@components';
 import { StartButton, Selection, StartTask } from './components';
-import styled from 'styled-components';
 
-const MainPageContainer = ({ className }) => {
+export const MainPage = ({ className }) => {
 	const isSelect = useMatch('/selection');
 	const isStartTask = useMatch('/start/task/:id');
 
@@ -21,5 +20,3 @@ const MainPageContainer = ({ className }) => {
 		</PageComponent>
 	);
 };
-
-export const MainPage = styled(MainPageContainer)``;

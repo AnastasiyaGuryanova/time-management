@@ -53,18 +53,11 @@ export const Pagination = styled(PaginationContainer)`
 	align-items: center;
 	justify-content: center;
 	margin-top: 20px;
+	font-weight: bold;
+	font-size: 22px;
 
-	& button {
-		margin: 0 5px;
-		padding: 5px 10px;
-		background-color: #f0f0f0;
-		border: 1px solid #ccc;
-		border-radius: 3px;
-		cursor: pointer;
-
-		&:disabled {
-			cursor: not-allowed;
-			opacity: 0.5;
-		}
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 `;

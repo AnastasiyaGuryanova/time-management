@@ -15,3 +15,4 @@ export * from './delete-task';
 export * from './get-tasks-all-projects';
 export * from './update-user';
 export * from './update-session';
+export * from './get-task';

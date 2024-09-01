@@ -19,8 +19,4 @@ export const Select = styled(SelectContainer)`
 	border: 1px solid ${(props) => props.theme.colors.borderColor};
 	border-radius: 7px;
 	transition: background-color 0.3s ease;
-
-	&:focus {
-		background-color: ${(props) => props.theme.colors.textInputFieldBackgroundActive};
-	}
 `;

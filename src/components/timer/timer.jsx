@@ -1,12 +1,14 @@
 import { useDispatch } from 'react-redux';
-import { useTimer } from '@hooks';
-import { Tooltip, Icon, H2 } from '@components';
+import { useNavigate } from 'react-router-dom';
+import { useTimer, useServerRequest } from '@hooks';
+import { saveTaskAsync } from '@actions';
+import { Tooltip, Icon, H2, PageComponent } from '@components';
 import styled from 'styled-components';
 
 const TimerCard = styled.div`
 	width: 50px;
 	height: 70px;
-	background-color: #f0f0f0;
+	background-color: ${(props) => props.theme.colors.timerCardBackground};
 	border-radius: 8px;
 	display: flex;
 	justify-content: center;
@@ -30,20 +32,28 @@ const TimerDisplay = styled.div`
 
 const ButtonContainer = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	margin-top: 20px;
 `;
 
 const TimerContainer = ({ className, taskId, taskName }) => {
 	const { isRunning, start, stop, reset, duration, startTime } = useTimer();
+	const requestServer = useServerRequest();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	console.log(taskId);
-
-	const handleStop = () => {
-		stop();
-
-		console.log('startTime:', startTime);
+	const onSave = () => {
+		if (duration > 0) {
+			dispatch(
+				saveTaskAsync(requestServer, {
+					id: taskId,
+					startTime,
+					duration: Number(duration),
+				}),
+			).then(() => navigate(`/`));
+		} else {
+			alert('Запустите таймер, что бы приступить к выполнению');
+		}
 	};
 
 	const hours = Math.floor(duration / 3600)
@@ -55,7 +65,7 @@ const TimerContainer = ({ className, taskId, taskName }) => {
 	const seconds = (duration % 60).toString().padStart(2, '0');
 
 	return (
-		<div className={className}>
+		<PageComponent className={className}>
 			<H2>Задача: {taskName}</H2>
 
 			<TimerDisplay>
@@ -80,20 +90,34 @@ const TimerContainer = ({ className, taskId, taskName }) => {
 					</Tooltip>
 				) : (
 					<Tooltip text="Стоп">
-						<Icon id="fa-stop-circle-o" size="50px" onClick={handleStop} />
+						<Icon id="fa-stop-circle-o" size="50px" onClick={() => stop()} />
 					</Tooltip>
 				)}
+				<Tooltip text="Сохранить">
+					<Icon
+						id="fa-check"
+						size="50px"
+						margin="0 40px"
+						disabled={isRunning}
+						onClick={onSave}
+					/>
+				</Tooltip>
+
 				<Tooltip text="Сброс">
 					<Icon id="fa-repeat" size="50px" onClick={reset} />
 				</Tooltip>
 			</ButtonContainer>
-		</div>
+		</PageComponent>
 	);
 };
 
 export const Timer = styled(TimerContainer)`
-	background-color: #ffffff;
+	background-color: ${(props) => props.theme.colors.timerBackground};
 	border-radius: 12px;
 	padding: 20px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+	& h2 {
+		color: ${(props) => props.theme.colors.timerTextColor};
+	}
 `;

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { getCurrentDateTime } from '@helpers';
 
 export const useTimer = (initialDuration = 0) => {
 	const [isRunning, setIsRunning] = useState(false);
@@ -10,8 +11,7 @@ export const useTimer = (initialDuration = 0) => {
 		if (!isRunning) {
 			setIsRunning(true);
 
-			const date = new Date();
-			setStartTime(date);
+			setStartTime(getCurrentDateTime());
 			setIntervalId(
 				setInterval(() => {
 					setDuration((prevDuration) => prevDuration + 1);

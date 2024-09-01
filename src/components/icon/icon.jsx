@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const IconContainer = ({ className, id, color, ...props }) => (
-	<div className={className} {...props}>
+const IconContainer = ({ className, id, color, disabled, ...props }) => (
+	<div className={className} disabled={disabled} {...props}>
 		<i className={`fa ${id}`} aria-hidden="true"></i>
 	</div>
 );
@@ -13,7 +13,14 @@ export const Icon = styled(IconContainer)`
 	cursor: pointer;
 	transition: color 0.3s ease;
 
-	:hover {
-		color: ${({ theme }) => theme.colors.mainHover};
+	&:hover {
+		color: ${(props) => !props.disabled && props.theme.colors.mainHover};
 	}
+
+	${({ disabled, theme }) =>
+		disabled &&
+		`
+		color: ${theme.colors.disabledColor};
+		cursor: default;
+	`}
 `;

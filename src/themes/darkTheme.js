@@ -12,8 +12,15 @@ export const darkTheme = {
 		mainButtonText: '#939393',
 		mainButtonBackground: '#393939',
 
+		disabledBackground: '#808080',
+		disabledColor: '#808080',
+
 		mainHover: '#FBAC44',
 		mainText: '#393939',
+
+		timerTextColor: '#393939',
+		timerBackground: '#A9A9A9',
+		timerCardBackground: '#DFDFDF',
 
 		iconColor: '#393939',
 		tooltipColor: '#FBAC44',
@@ -30,10 +37,7 @@ export const darkTheme = {
 		loaderColor: '#393939',
 
 		textInputFieldBackground: '#BCBCC5',
-		textInputFieldBackgroundActive: '#A9A9A9',
-
 		switchBackground: '#A9A9A9',
-
 		errorFormColorText: '#ff0000',
 	},
 };

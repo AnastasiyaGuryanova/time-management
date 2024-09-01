@@ -5,6 +5,7 @@ import { H2, Select, Button, Loader } from '@components';
 import { selectTasksAllProjects } from '@selectors';
 import { loadTasksAllProjectsAsync } from '@actions';
 import { useServerRequest } from '@hooks';
+import { durationToHoursAndMinutes } from '@helpers';
 import styled from 'styled-components';
 
 const SelectionContainer = ({ className }) => {
@@ -41,7 +42,8 @@ const SelectionContainer = ({ className }) => {
 
 				{tasks.map((task) => (
 					<option key={task.id} value={task.id}>
-						{task.taskText}
+						{task.taskText}, затрачено времени:{' '}
+						{durationToHoursAndMinutes(task.duration)}
 					</option>
 				))}
 			</Select>
@@ -51,7 +53,9 @@ const SelectionContainer = ({ className }) => {
 				margin="30px 0 0 0"
 				onClick={() =>
 					navigate(`/start/task/${selectedTaskId}`, {
-						state: { taskName: selectedTaskName },
+						state: {
+							taskName: selectedTaskName,
+						},
 					})
 				}
 			>

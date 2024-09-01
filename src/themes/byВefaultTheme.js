@@ -12,8 +12,15 @@ export const byВefaultTheme = {
 		mainButtonText: '#fafafa',
 		mainButtonBackground: '#084D63',
 
+		disabledBackground: '#9AB4BB',
+		disabledColor: '#9AB4BB',
+
 		mainHover: '#FBAC44',
 		mainText: '#084D63',
+
+		timerTextColor: '#084D63',
+		timerBackground: '#CBDADF',
+		timerCardBackground: '#DFDFDF',
 
 		iconColor: '#084D63',
 		colorTransparent: '#084D6380',
@@ -31,10 +38,7 @@ export const byВefaultTheme = {
 		loaderColor: '#084D63',
 
 		textInputFieldBackground: '#EAEFF2',
-		textInputFieldBackgroundActive: '#CBD5DB',
-
 		switchBackground: '#EAEFF2',
-
 		errorFormColorText: '#ff0000',
 	},
 };

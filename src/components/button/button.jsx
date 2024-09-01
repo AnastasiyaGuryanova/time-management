@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const ButtonContainer = forwardRef(({ className, children, ...props }, ref) => (
-	<button className={className} ref={ref} {...props}>
+const ButtonContainer = forwardRef(({ className, children, disabled, ...props }, ref) => (
+	<button className={className} ref={ref} disabled={disabled} {...props}>
 		{children}
 	</button>
 ));
@@ -23,4 +23,11 @@ export const Button = styled(ButtonContainer)`
 	&:hover {
 		background-color: ${(props) => !props.disabled && props.theme.colors.mainHover};
 	}
+
+	${({ disabled, theme }) =>
+		disabled &&
+		`
+		background-color: ${theme.colors.disabledBackground};
+		cursor: default;
+	`}
 `;
