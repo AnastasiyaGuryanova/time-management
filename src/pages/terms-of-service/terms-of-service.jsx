@@ -1,4 +1,5 @@
 import { PageComponent, H2 } from '@components';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const TermsOfServiceContainer = ({ className }) => {
@@ -93,3 +94,7 @@ export const TermsOfService = styled(TermsOfServiceContainer)`
 		color: ${(props) => props.theme.colors.mainHover};
 	}
 `;
+
+TermsOfServiceContainer.propTypes = {
+	className: PropTypes.string,
+};

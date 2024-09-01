@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Icon, H2 } from '@components';
 import styled from 'styled-components';
 
@@ -34,3 +35,7 @@ export const StartButton = styled(StartButtonContainer)`
 		pointer-events: none;
 	}
 `;
+
+StartButtonContainer.propTypes = {
+	className: PropTypes.string,
+};

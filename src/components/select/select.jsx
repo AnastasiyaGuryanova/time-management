@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const SelectContainer = ({ className, children, width, margin, ...props }) => {
@@ -20,3 +21,10 @@ export const Select = styled(SelectContainer)`
 	border-radius: 7px;
 	transition: background-color 0.3s ease;
 `;
+
+SelectContainer.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.node.isRequired,
+	width: PropTypes.string,
+	margin: PropTypes.string,
+};

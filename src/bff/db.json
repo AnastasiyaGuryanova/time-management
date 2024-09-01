@@ -8,6 +8,15 @@
       "role_id": 1,
       "created_at": "2024-07-27 15:14",
       "updated_at": "2024-08-18 12:33"
+    },
+    {
+      "name": "test",
+      "email": "a@mail.ru",
+      "password": "123456",
+      "role_id": 1,
+      "created_at": "2024-09-01 10:31",
+      "updated_at": "2024-09-01 10:31",
+      "id": "kBwnWE_"
     }
   ],
   "projects": [
@@ -79,13 +88,6 @@
       "description": "вавыа",
       "created_at": "2024-08-31 09:55",
       "id": "98H5zyQ"
-    },
-    {
-      "user_id": "1",
-      "title": "уцкук",
-      "description": "уккку",
-      "created_at": "2024-08-31 09:56",
-      "id": "Rr5_rYd"
     }
   ],
   "tasks": [
@@ -128,8 +130,8 @@
       "user_id": "1",
       "task_text": "Задача 1 для проекта 2",
       "start_time": "2024-08-11 08:00",
-      "end_time": "2024-08-11 09:00",
-      "duration": 3600,
+      "end_time": "2024-09-01 10:30",
+      "duration": 3602,
       "created_at": "2024-08-10 08:00",
       "updated_at": "2024-08-11 09:00"
     },
@@ -272,7 +274,7 @@
       "task_text": "Задача 4 для проекта 6",
       "start_time": "2024-08-15 13:00",
       "end_time": "2024-08-15 14:30",
-      "duration": 5400,
+      "duration": 15400,
       "created_at": "2024-08-14 11:00",
       "updated_at": "2024-08-15 14:30"
     },
@@ -299,19 +301,5 @@
       "updated_at": "2024-08-15 14:30"
     }
   ],
-  "sessions": [
-    {
-      "hash": "0.70168069772775010228826886304887011647224426269531",
-      "user": {
-        "id": "1",
-        "name": "Nastya",
-        "email": "ana@mail.ru",
-        "password": "qwe123",
-        "roleId": 1,
-        "createdAt": "2024-07-27 15:14",
-        "updatedAt": "2024-08-18 12:33"
-      },
-      "id": 1
-    }
-  ]
+  "sessions": []
 }

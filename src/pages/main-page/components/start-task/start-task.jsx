@@ -1,8 +1,8 @@
 import { useLocation, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Timer } from '@components';
-import styled from 'styled-components';
 
-const StartTaskContainer = ({ className }) => {
+export const StartTask = ({ className }) => {
 	const { id } = useParams();
 	const location = useLocation();
 	const taskName = location.state?.taskName || 'Задача';
@@ -14,4 +14,6 @@ const StartTaskContainer = ({ className }) => {
 	);
 };
 
-export const StartTask = styled(StartTaskContainer)``;
+StartTask.propTypes = {
+	className: PropTypes.string,
+};

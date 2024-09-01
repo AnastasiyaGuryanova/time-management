@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useMatch, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { H2, UserForm, PageComponent } from '@components';
 import { selectUser } from '@selectors';
 import { ThemeSwitcher, UserContent } from './components';
@@ -43,3 +44,7 @@ export const SettingsPage = styled(SettingsPageContainer)`
 		justify-content: space-between;
 	}
 `;
+
+SettingsPageContainer.propTypes = {
+	className: PropTypes.string,
+};

@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Button } from '@components';
 import {
 	selectModalIsOpen,
@@ -76,3 +77,7 @@ export const Modal = styled(ModalContainer)`
 		margin-top: 25px;
 	}
 `;
+
+ModalContainer.propTypes = {
+	className: PropTypes.string,
+};

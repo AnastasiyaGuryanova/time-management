@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { saveTaskAsync } from '@actions';
 import { useServerRequest } from '@hooks';
 import { Input, Icon, Tooltip } from '@components';
@@ -70,3 +71,12 @@ export const TaskForm = styled(TaskFormContainer)`
 		border: none;
 	}
 `;
+
+TaskFormContainer.propTypes = {
+	task: PropTypes.shape({
+		id: PropTypes.string,
+		taskText: PropTypes.string,
+	}),
+	onSaveComplete: PropTypes.func,
+	className: PropTypes.string,
+};

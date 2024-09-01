@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { PageComponent, H2 } from '@components';
 import styled from 'styled-components';
 
@@ -91,3 +92,7 @@ export const PrivacyPolicy = styled(PrivacyPolicyContainer)`
 		width: 100%;
 	}
 `;
+
+PrivacyPolicyContainer.propTypes = {
+	className: PropTypes.string,
+};

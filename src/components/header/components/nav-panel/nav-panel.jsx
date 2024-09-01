@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Button, Icon, Tooltip } from '@components';
 import { selectUserSession } from '@selectors';
 import { logout } from '@actions';
@@ -62,3 +63,7 @@ export const NavPanel = styled(NavPanelContainer)`
 		background-color: ${(props) => props.theme.colors.mainHover};
 	}
 `;
+
+NavPanelContainer.propTypes = {
+	className: PropTypes.string,
+};

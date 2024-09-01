@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { PageComponent, H2 } from '@components';
 
 export const Error = ({ error }) =>
@@ -7,3 +8,7 @@ export const Error = ({ error }) =>
 			<div>{error}</div>
 		</PageComponent>
 	);
+
+Error.propTypes = {
+	error: PropTypes.string,
+};

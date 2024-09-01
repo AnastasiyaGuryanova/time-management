@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import PropTypes from 'prop-types';
 import { Button, Input, AuthFormError, StyledLink } from '@components';
 import { setUser } from '@actions';
 import { useServerRequest } from '@hooks';
@@ -147,3 +148,16 @@ export const UserForm = styled(UserFormContainer)`
 		justify-content: center;
 	}
 `;
+
+UserFormContainer.propTypes = {
+	defaultValues: PropTypes.shape({
+		name: PropTypes.string,
+		email: PropTypes.string,
+		password: PropTypes.string,
+		confirmPassword: PropTypes.string,
+	}).isRequired,
+	submitButtonText: PropTypes.string.isRequired,
+	onSuccess: PropTypes.func,
+	isEdit: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+	className: PropTypes.string,
+};

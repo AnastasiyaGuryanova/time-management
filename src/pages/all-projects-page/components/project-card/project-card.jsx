@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { ControlPanel } from '@components';
 import { removeProjectAsync } from '@actions';
 import { useServerRequest } from '@hooks';
@@ -76,3 +77,11 @@ export const ProjectCard = styled(ProjectCardContainer)`
 		text-align: right;
 	}
 `;
+
+ProjectCardContainer.propTypes = {
+	className: PropTypes.string,
+	id: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	createdAt: PropTypes.string.isRequired,
+};

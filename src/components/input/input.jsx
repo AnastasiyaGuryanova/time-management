@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const InputContainer = forwardRef(({ className, width, margin, ...props }, ref) => {
@@ -21,3 +22,9 @@ export const Input = styled(InputContainer)`
 		background-color: ${(props) => props.theme.colors.textInputFieldBackgroundActive};
 	}
 `;
+
+InputContainer.propTypes = {
+	className: PropTypes.string,
+	width: PropTypes.string,
+	margin: PropTypes.string,
+};

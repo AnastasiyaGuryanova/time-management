@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { useMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { RESET_PROJECT_DATA } from '@actions';
 import { ProjectForm, H2, PageComponent } from '@components';
 import { selectProject } from '@selectors';
@@ -33,3 +34,7 @@ export const NewProject = styled(NewProjectContainer)`
 	margin: 0 auto auto;
 	padding-top: 50px;
 `;
+
+NewProjectContainer.propTypes = {
+	className: PropTypes.string,
+};

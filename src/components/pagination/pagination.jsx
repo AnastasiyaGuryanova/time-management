@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Icon } from '@components';
 import { PAGINATION_LIMIT } from '@constants';
 import styled from 'styled-components';
@@ -61,3 +62,9 @@ export const Pagination = styled(PaginationContainer)`
 		opacity: 0.5;
 	}
 `;
+
+PaginationContainer.propTypes = {
+	totalItems: PropTypes.number.isRequired,
+	onPageChange: PropTypes.func.isRequired,
+	className: PropTypes.string,
+};

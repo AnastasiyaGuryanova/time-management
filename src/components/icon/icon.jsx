@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const IconContainer = ({ className, id, color, disabled, ...props }) => (
@@ -24,3 +25,10 @@ export const Icon = styled(IconContainer)`
 		cursor: default;
 	`}
 `;
+
+IconContainer.propTypes = {
+	className: PropTypes.string,
+	id: PropTypes.string.isRequired,
+	color: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+	disabled: PropTypes.bool,
+};

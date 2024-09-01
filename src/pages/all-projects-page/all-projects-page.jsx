@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { loadProjectsAsync } from '@actions';
 import { selectProjects } from '@selectors';
 import { useServerRequest, usePaginationAndSearch } from '@hooks';
@@ -80,3 +81,7 @@ export const AllProjectsPage = styled(AllProjectsPageContainer)`
 		justify-content: space-between;
 	}
 `;
+
+AllProjectsPageContainer.propTypes = {
+	className: PropTypes.string,
+};

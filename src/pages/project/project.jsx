@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { selectProject } from '@selectors';
 import { loadProjectAsync } from '@actions';
 import { useServerRequest } from '@hooks';
@@ -52,3 +53,7 @@ export const Project = styled(ProjectContainer)`
 		font-size: 22px;
 	}
 `;
+
+ProjectContainer.propTypes = {
+	className: PropTypes.string,
+};

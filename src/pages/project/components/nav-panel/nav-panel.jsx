@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { H2 } from '@components';
 import styled from 'styled-components';
 
@@ -43,3 +44,8 @@ export const NavPanel = styled(NavPanelContainer)`
 		text-decoration: underline;
 	}
 `;
+
+NavPanelContainer.propTypes = {
+	projectId: PropTypes.string.isRequired,
+	className: PropTypes.string,
+};

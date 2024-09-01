@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { OPEN_MODAL, CLOSE_MODAL } from '@actions';
 import { Icon, Tooltip } from '@components';
 import styled from 'styled-components';
@@ -35,3 +36,9 @@ export const ControlPanel = styled(ControlPanelContainer)`
 	display: flex;
 	align-items: center;
 `;
+
+ControlPanelContainer.propTypes = {
+	className: PropTypes.string,
+	onRemove: PropTypes.func.isRequired,
+	onEdit: PropTypes.func.isRequired,
+};

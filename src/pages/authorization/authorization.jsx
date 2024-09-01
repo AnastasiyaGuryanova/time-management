@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, AuthFormError, StyledLink, H2, PageComponent } from '@components';
 import { useServerRequest } from '@hooks';
@@ -143,3 +144,7 @@ export const Authorization = styled(AuthorizationContainer)`
 		margin: 10px 0 20px 0;
 	}
 `;
+
+AuthorizationContainer.propTypes = {
+	className: PropTypes.string,
+};

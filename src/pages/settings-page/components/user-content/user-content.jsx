@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Tooltip, Icon } from '@components';
 import styled from 'styled-components';
 
@@ -43,3 +44,11 @@ export const UserContent = styled(UserContentContainer)`
 		right: 20px;
 	}
 `;
+
+UserContentContainer.propTypes = {
+	className: PropTypes.string,
+	user: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		email: PropTypes.string.isRequired,
+	}).isRequired,
+};

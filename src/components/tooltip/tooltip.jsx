@@ -1,5 +1,6 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const TooltipContainer = ({ text, children, className }) => {
 	const [visible, setVisible] = useState(false);
@@ -8,11 +9,7 @@ const TooltipContainer = ({ text, children, className }) => {
 	const hideTooltip = () => setVisible(false);
 
 	return (
-		<div
-			className={className}
-			onMouseEnter={showTooltip}
-			onMouseLeave={hideTooltip}
-		>
+		<div className={className} onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
 			{children}
 			{visible && <div className="tooltip">{text}</div>}
 		</div>
@@ -38,10 +35,16 @@ export const Tooltip = styled(TooltipContainer)`
 	}
 
 	& .tooltip::after {
-		content: "";
+		content: '';
 		position: absolute;
 		top: 50%;
 		left: 100%;
 		margin-top: -5px;
 	}
 `;
+
+TooltipContainer.propTypes = {
+	text: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
+	className: PropTypes.string,
+};

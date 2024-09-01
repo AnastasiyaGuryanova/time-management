@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { selectUserRole } from '@selectors';
 import { Icon, Tooltip } from '@components';
 import styled from 'styled-components';
@@ -30,3 +31,7 @@ export const BackArrow = styled(BackArrowContainer)`
 	left: 20%;
 	color: ${(props) => props.theme.colors.mainText};
 `;
+
+BackArrowContainer.propTypes = {
+	className: PropTypes.string,
+};

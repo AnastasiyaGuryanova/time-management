@@ -1,4 +1,5 @@
 import { Bar } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
 
 export const TimeSpentBarChart = ({ data }) => {
 	const chartData = {
@@ -13,4 +14,13 @@ export const TimeSpentBarChart = ({ data }) => {
 	};
 
 	return <Bar data={chartData} />;
+};
+
+TimeSpentBarChart.propTypes = {
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			projectTitle: PropTypes.string.isRequired,
+			duration: PropTypes.number.isRequired,
+		}),
+	).isRequired,
 };

@@ -45,8 +45,6 @@ export const saveUser = async (hash, newName, newEmail, newPassword) => {
 		newHash = sessions.create(currentUser);
 	}
 
-	console.log(currentUser);
-
 	return {
 		error: null,
 		res: {

@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ButtonContainer = forwardRef(({ className, children, disabled, ...props }, ref) => (
@@ -31,3 +32,9 @@ export const Button = styled(ButtonContainer)`
 		cursor: default;
 	`}
 `;
+
+ButtonContainer.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.node.isRequired,
+	disabled: PropTypes.bool,
+};

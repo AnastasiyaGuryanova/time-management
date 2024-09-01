@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useServerRequest, usePaginationAndSearch } from '@hooks';
 import { loadTasksProjectAsync } from '@actions';
 import { Search, Pagination, Loader } from '@components';
@@ -68,3 +69,8 @@ export const Tasks = styled(TasksContainer)`
 		font-weight: 500;
 	}
 `;
+
+TasksContainer.propTypes = {
+	className: PropTypes.string,
+	projectId: PropTypes.string.isRequired,
+};

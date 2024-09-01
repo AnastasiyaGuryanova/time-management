@@ -1,4 +1,5 @@
 import { useMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { PageComponent } from '@components';
 import { StartButton, Selection, StartTask } from './components';
 
@@ -19,4 +20,8 @@ export const MainPage = ({ className }) => {
 			{isStartTask ? <StartTask /> : <StartButton />}
 		</PageComponent>
 	);
+};
+
+MainPage.propTypes = {
+	className: PropTypes.string,
 };

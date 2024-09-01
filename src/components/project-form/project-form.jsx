@@ -1,6 +1,7 @@
 import { useState, useLayoutEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Button, Input } from '@components';
 import { saveProjectAsync } from '@actions';
 import { useServerRequest } from '@hooks';
@@ -114,3 +115,12 @@ export const ProjectForm = styled(ProjectFormContainer)`
 		margin-top: 30px;
 	}
 `;
+
+ProjectFormContainer.propTypes = {
+	project: PropTypes.shape({
+		id: PropTypes.string,
+		title: PropTypes.string,
+		description: PropTypes.string,
+	}).isRequired,
+	className: PropTypes.string,
+};

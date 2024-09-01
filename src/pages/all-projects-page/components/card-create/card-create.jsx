@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Icon } from '@components';
 import styled from 'styled-components';
 
@@ -45,3 +46,7 @@ export const CardCreate = styled(CardCreateContainer)`
 		}
 	}
 `;
+
+CardCreateContainer.propTypes = {
+	className: PropTypes.string,
+};

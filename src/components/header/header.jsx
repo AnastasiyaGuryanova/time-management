@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { NavPanel } from "./components";
-import { selectUserRole } from "@selectors";
-import { ROLE } from "@constants";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { NavPanel } from './components';
+import { selectUserRole } from '@selectors';
+import { ROLE } from '@constants';
+import styled from 'styled-components';
 
 const HeaderContainer = ({ className }) => {
 	const roleId = useSelector(selectUserRole);
@@ -35,3 +36,7 @@ export const Header = styled(HeaderContainer)`
 		font-size: 40px;
 	}
 `;
+
+HeaderContainer.propTypes = {
+	className: PropTypes.string,
+};

@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useTimer, useServerRequest } from '@hooks';
 import { saveTaskAsync } from '@actions';
 import { Tooltip, Icon, H2, PageComponent } from '@components';
@@ -121,3 +122,9 @@ export const Timer = styled(TimerContainer)`
 		color: ${(props) => props.theme.colors.timerTextColor};
 	}
 `;
+
+TimerContainer.propTypes = {
+	className: PropTypes.string,
+	taskId: PropTypes.string.isRequired,
+	taskName: PropTypes.string.isRequired,
+};

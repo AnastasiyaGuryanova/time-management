@@ -1,5 +1,6 @@
-import { Pie } from "react-chartjs-2";
-import { durationToHoursAndMinutes, generateRandomColors } from "@helpers";
+import { Pie } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
+import { durationToHoursAndMinutes, generateRandomColors } from '@helpers';
 
 export const TimeDistributionPieChart = ({ data }) => {
 	const chartData = {
@@ -26,4 +27,13 @@ export const TimeDistributionPieChart = ({ data }) => {
 	};
 
 	return <Pie data={chartData} options={options} />;
+};
+
+TimeDistributionPieChart.propTypes = {
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			projectTitle: PropTypes.string.isRequired,
+			duration: PropTypes.number.isRequired,
+		}),
+	).isRequired,
 };

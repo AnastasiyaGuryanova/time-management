@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useServerRequest } from '@hooks';
 import { removeTaskAsync } from '@actions';
 import { ControlPanel } from '@components';
@@ -49,3 +50,11 @@ export const Task = styled(TaskContainer)`
 		margin-right: 10px;
 	}
 `;
+
+TaskContainer.propTypes = {
+	task: PropTypes.shape({
+		id: PropTypes.string.isRequired,
+		taskText: PropTypes.string.isRequired,
+	}).isRequired,
+	className: PropTypes.string,
+};

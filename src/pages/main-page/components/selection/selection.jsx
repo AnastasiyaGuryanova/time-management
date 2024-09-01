@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { H2, Select, Button, Loader } from '@components';
 import { selectTasksAllProjects } from '@selectors';
 import { loadTasksAllProjectsAsync } from '@actions';
@@ -71,3 +72,7 @@ export const Selection = styled(SelectionContainer)`
 	flex-direction: column;
 	width: 700px;
 `;
+
+SelectionContainer.propTypes = {
+	className: PropTypes.string,
+};

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Input, Button, Select } from '@components';
 import styled from 'styled-components';
 
@@ -77,3 +78,9 @@ export const Filters = styled(FiltersContainer)`
 		}
 	}
 `;
+
+FiltersContainer.propTypes = {
+	projects: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onApplyFilters: PropTypes.func.isRequired,
+	className: PropTypes.string,
+};

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { loadTasksAllProjectsAsync, loadProjectsAsync } from '@actions';
 import { selectTasksAllProjects, selectProjects } from '@selectors';
 import { useServerRequest } from '@hooks';
@@ -107,3 +108,7 @@ export const Analytics = styled(AnalyticsContainer)`
 		border-radius: 7px;
 	}
 `;
+
+AnalyticsContainer.propTypes = {
+	className: PropTypes.string,
+};

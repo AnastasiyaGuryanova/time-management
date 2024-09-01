@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Icon } from '@components';
 import { byВefaultTheme } from '@themes';
 import { useThemeSwitcher } from '@hooks';
@@ -62,3 +63,7 @@ export const ThemeSwitcher = styled(ThemeSwitcherContainer)`
 			theme === byВefaultTheme ? 'flex-start' : 'flex-end'};
 	}
 `;
+
+ThemeSwitcherContainer.propTypes = {
+	className: PropTypes.string,
+};

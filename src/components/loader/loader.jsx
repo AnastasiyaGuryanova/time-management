@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { PageComponent } from '@components';
 import styled from 'styled-components';
 
@@ -32,3 +33,7 @@ export const Loader = styled(LoaderContainer)`
 		}
 	}
 `;
+
+LoaderContainer.propTypes = {
+	className: PropTypes.string,
+};
