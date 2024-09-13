@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const { generate } = require('../helpers/token');
 
-function getUsers() {
-	return User.find();
+async function getCurrentUser(userId) {
+	return User.findById(userId);
 }
 
 // register
@@ -44,8 +44,12 @@ async function login(email, password) {
 }
 
 // edit
-function updateUser(id, userData) {
+async function updateUser(id, userData) {
+	if (userData.password) {
+		userData.password = await bcrypt.hash(userData.password, 10);
+	}
+
 	return User.findByIdAndUpdate(id, userData, { returnDocument: 'after' });
 }
 
-module.exports = { register, login, getUsers, updateUser };
+module.exports = { register, login, getCurrentUser, updateUser };
