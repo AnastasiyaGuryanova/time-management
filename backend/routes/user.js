@@ -16,13 +16,13 @@ router.get('/', authenticated, async (req, res) => {
 });
 
 router.patch('/:id', authenticated, async (req, res) => {
-	const newUser = await updateUser(req.params.id, {
+	const updatedUser = await updateUser(req.params.id, {
 		name: req.body.name,
 		email: req.body.email,
 		password: req.body.password,
 	});
 
-	res.send({ data: mapUser(newUser) });
+	res.send({ data: mapUser(updatedUser) });
 });
 
 module.exports = router;

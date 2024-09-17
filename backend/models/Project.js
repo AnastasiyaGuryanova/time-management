@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const ProjectSchema = mongoose.Schema(
 	{
-		user_id: {
-			type: Number,
+		userId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
 			required: true,
 		},
 		title: {
@@ -12,7 +13,7 @@ const ProjectSchema = mongoose.Schema(
 		},
 		description: {
 			type: String,
-			required: false,
+			required: true,
 		},
 		tasks: [
 			{
