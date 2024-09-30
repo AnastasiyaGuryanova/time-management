@@ -1,17 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Icon, Tooltip } from '@components';
-import { selectUserSession } from '@selectors';
 import { logout } from '@actions';
 import styled from 'styled-components';
 
 const NavPanelContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const session = useSelector(selectUserSession);
 
 	const onLogout = () => {
-		dispatch(logout(session));
+		dispatch(logout());
 		sessionStorage.removeItem('userData');
 	};
 

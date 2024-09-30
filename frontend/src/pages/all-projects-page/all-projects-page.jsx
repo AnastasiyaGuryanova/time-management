@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadProjectsAsync } from '@actions';
 import { selectProjects } from '@selectors';
-import { useServerRequest, usePaginationAndSearch } from '@hooks';
+import { usePaginationAndSearch } from '@hooks';
 import { H2, PageComponent, Search, Loader, Pagination } from '@components';
 import { PAGINATION_LIMIT } from '@constants';
 import { ProjectCard, CardCreate } from './components';
@@ -11,7 +11,6 @@ import styled from 'styled-components';
 
 const AllProjectsPageContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
 	const projects = useSelector(selectProjects);
 
 	const {
@@ -24,8 +23,8 @@ const AllProjectsPageContainer = ({ className }) => {
 	} = usePaginationAndSearch(projects || [], 'title');
 
 	useEffect(() => {
-		dispatch(loadProjectsAsync(requestServer));
-	}, [dispatch, requestServer]);
+		dispatch(loadProjectsAsync());
+	}, [dispatch]);
 
 	if (projects === null) {
 		return <Loader />;

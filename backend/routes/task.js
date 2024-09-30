@@ -4,7 +4,6 @@ const {
 	deleteTask,
 	getTask,
 	editTask,
-	getAllTasksForUser,
 	getTasks,
 } = require('../controllers/task');
 const mapTask = require('../helpers/mapTask');

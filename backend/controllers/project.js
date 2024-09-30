@@ -1,4 +1,5 @@
 const Project = require('../models/Project');
+const Task = require('../models/Task');
 
 // add
 async function addProject(project) {
@@ -17,13 +18,15 @@ async function editProject(id, project) {
 }
 
 // delete
-function deleteProject(id) {
-	return Project.deleteOne({ _id: id });
+async function deleteProject(id) {
+	await Project.deleteOne({ _id: id });
+
+	await Task.deleteMany({ projectId: id });
 }
 
 //get all
 async function getProjects(userId) {
-	const projects = await Project.find({ userId }).sort({ createdAt: -1 });
+	const projects = await Project.find({ userId }).sort({ createdAt: 1 });
 
 	return projects;
 }

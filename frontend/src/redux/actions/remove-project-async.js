@@ -1,9 +1,7 @@
-import { removeProjectSuccess } from "./remove-project-success";
+import { removeProjectSuccess } from './remove-project-success';
+import { request } from '@helpers';
 
-export const removeProjectAsync = (requestServer, id) => (dispatch) =>
-	requestServer("removeProject", id).then((projectData) => {
-		if (projectData.res) {
-			dispatch(removeProjectSuccess(id));
-		}
-		return projectData;
+export const removeProjectAsync = (id) => (dispatch) =>
+	request(`/projects/${id}`, 'DELETE').then(() => {
+		dispatch(removeProjectSuccess(id));
 	});

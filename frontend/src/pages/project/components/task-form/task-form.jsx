@@ -3,17 +3,15 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { saveTaskAsync } from '@actions';
-import { useServerRequest } from '@hooks';
 import { Input, Icon, Tooltip } from '@components';
 import styled from 'styled-components';
 
 const TaskFormContainer = ({ task = {}, onSaveComplete, className }) => {
-	const { id = '', taskText = '' } = task;
+	const { id = null, taskText = '' } = task;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const params = useParams();
 	const [taskValue, setTaskValue] = useState(taskText);
-	const requestServer = useServerRequest();
 
 	const onTaskChange = ({ target }) => {
 		setTaskValue(target.value);
@@ -25,16 +23,16 @@ const TaskFormContainer = ({ task = {}, onSaveComplete, className }) => {
 	};
 
 	const onSaveTask = () => {
+		const projectId = params.id;
+
 		if (taskValue) {
 			dispatch(
-				saveTaskAsync(requestServer, {
-					id,
-					projectId: params.id,
+				saveTaskAsync(projectId, id, {
 					taskText: taskValue,
 				}),
-			).then(({ project_id }) => {
+			).then(({ projectId }) => {
 				onSaveComplete && onSaveComplete();
-				navigate(`/project/${project_id}/tasks`);
+				navigate(`/project/${projectId}/tasks`);
 			});
 		} else {
 			alert('Введите текст задачи');

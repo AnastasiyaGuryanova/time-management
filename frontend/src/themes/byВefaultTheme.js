@@ -1,5 +1,6 @@
 export const byВefaultTheme = {
 	colors: {
+		id: 'default',
 		headerFooterBackground: '#084D63',
 		headerFooterText: '#fafafa',
 		headerFooterShadow: '#084D63',

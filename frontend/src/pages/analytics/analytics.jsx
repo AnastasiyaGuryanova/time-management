@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { loadTasksAllProjectsAsync, loadProjectsAsync } from '@actions';
 import { selectTasksAllProjects, selectProjects } from '@selectors';
-import { useServerRequest } from '@hooks';
 import { H2, PageComponent, Loader } from '@components';
 import { Filters, TimeSpentBarChart, TimeDistributionPieChart } from './components';
 import { filterTasksByDate, filterTasksByProject, groupTasksByProject } from './utils';
@@ -11,7 +10,6 @@ import styled from 'styled-components';
 
 const AnalyticsContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
 
 	const tasks = useSelector(selectTasksAllProjects);
 	const projects = useSelector(selectProjects);
@@ -20,9 +18,9 @@ const AnalyticsContainer = ({ className }) => {
 	const [noTasksMessage, setNoTasksMessage] = useState('');
 
 	useEffect(() => {
-		dispatch(loadTasksAllProjectsAsync(requestServer));
-		dispatch(loadProjectsAsync(requestServer));
-	}, [dispatch, requestServer]);
+		dispatch(loadTasksAllProjectsAsync());
+		dispatch(loadProjectsAsync());
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (tasks && projects) {
@@ -42,8 +40,14 @@ const AnalyticsContainer = ({ className }) => {
 
 		filteredTasks = filterTasksByProject(filteredTasks, filters.selectedProject);
 
-		if (filteredTasks.length === 0) {
-			setNoTasksMessage('Нет задач за указанный период.');
+		const totalDuration = filteredTasks.reduce((sum, task) => sum + task.duration, 0);
+
+		if (filteredTasks.length === 0 || totalDuration === 0) {
+			filteredTasks.length === 0
+				? setNoTasksMessage('Нет задач за указанный период.')
+				: setNoTasksMessage(
+						'Вы еще не начали работать над задачами за указанный период.',
+					);
 			setProjectData([]);
 		} else {
 			if (filters.selectedProject && filters.selectedProject !== 'all') {

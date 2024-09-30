@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ControlPanel } from '@components';
 import { removeProjectAsync } from '@actions';
-import { useServerRequest } from '@hooks';
 import styled from 'styled-components';
 
 const ProjectCardContainer = ({ className, id, title, description, createdAt }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
 
 	const onProjectRemove = (id) => {
-		dispatch(removeProjectAsync(requestServer, id));
+		dispatch(removeProjectAsync(id));
 	};
 
 	const onProjectEdit = (id) => {

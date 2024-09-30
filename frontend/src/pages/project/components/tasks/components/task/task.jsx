@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useServerRequest } from '@hooks';
 import { removeTaskAsync } from '@actions';
 import { ControlPanel } from '@components';
 import { TaskForm } from '../../../task-form/task-form';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
 const TaskContainer = ({ task, className }) => {
 	const { id, taskText } = task;
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
+	const params = useParams();
 	const [isEditing, setIsEditing] = useState(false);
 
 	const onTaskRemove = (id) => {
-		dispatch(removeTaskAsync(requestServer, id));
+		dispatch(removeTaskAsync({ projectId: params.id, taskId: id }));
 	};
 
 	const onTaskEdit = () => {

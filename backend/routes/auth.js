@@ -17,7 +17,13 @@ router.post('/register', async (req, res) => {
 			user: mapUser(user),
 		});
 	} catch (e) {
-		res.send({ error: e.message || 'Unknown error' });
+		if (e.code === 11000 && e.keyPattern && e.keyPattern.email) {
+			res.status(409).send({ error: 'Пользователь с таким email уже существует.' });
+		} else {
+			res.status(500).send({
+				error: 'Произошла ошибка при регистрации пользователя.',
+			});
+		}
 	}
 });
 
@@ -30,7 +36,13 @@ router.post('/login', async (req, res) => {
 			user: mapUser(user),
 		});
 	} catch (e) {
-		res.send({ error: e.message || 'Unknown error' });
+		if (e.code === 11000 && e.keyPattern && e.keyPattern.email) {
+			res.status(409).send({ error: 'Пользователь с таким email уже существует.' });
+		} else {
+			res.status(500).send({
+				error: 'Произошла ошибка при регистрации пользователя.',
+			});
+		}
 	}
 });
 

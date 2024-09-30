@@ -4,7 +4,6 @@ import { useParams, useMatch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { selectProject } from '@selectors';
 import { loadProjectAsync } from '@actions';
-import { useServerRequest } from '@hooks';
 import { ProjectForm } from '@components';
 import { Tasks, NavPanel, TaskForm } from './components';
 import styled from 'styled-components';
@@ -12,13 +11,12 @@ import styled from 'styled-components';
 const ProjectContainer = ({ className }) => {
 	const params = useParams();
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
 	const project = useSelector(selectProject);
 	const isTasks = useMatch('/project/:id/tasks');
 
 	useEffect(() => {
-		dispatch(loadProjectAsync(requestServer, params.id));
-	}, [dispatch, params.id, requestServer]);
+		dispatch(loadProjectAsync(params.id));
+	}, [dispatch, params.id]);
 
 	return (
 		<div className={className}>

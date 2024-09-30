@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useServerRequest, usePaginationAndSearch } from '@hooks';
+import { usePaginationAndSearch } from '@hooks';
 import { loadTasksProjectAsync } from '@actions';
 import { Search, Pagination, Loader } from '@components';
 import { selectTasks } from '@selectors';
@@ -12,7 +12,6 @@ import styled from 'styled-components';
 const TasksContainer = ({ className, projectId }) => {
 	const dispatch = useDispatch();
 	const tasks = useSelector(selectTasks);
-	const requestServer = useServerRequest();
 
 	const {
 		searchPhrase,
@@ -23,8 +22,8 @@ const TasksContainer = ({ className, projectId }) => {
 	} = usePaginationAndSearch(tasks || [], 'taskText');
 
 	useEffect(() => {
-		dispatch(loadTasksProjectAsync(requestServer, projectId));
-	}, [dispatch, requestServer, projectId]);
+		dispatch(loadTasksProjectAsync(projectId));
+	}, [dispatch, projectId]);
 
 	if (tasks === null) {
 		return <Loader />;

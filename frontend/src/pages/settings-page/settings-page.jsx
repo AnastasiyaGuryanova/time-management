@@ -11,7 +11,7 @@ const SettingsPageContainer = ({ className }) => {
 	const isEdit = useMatch('/settings/user-edit');
 	const navigate = useNavigate();
 
-	const handleSuccess = () => () => navigate('/settings');
+	const handleSuccess = () => navigate('/settings');
 
 	return (
 		<PageComponent className={className}>

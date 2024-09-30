@@ -1,8 +1,8 @@
-import { ACTION_TYPE } from "./action-type";
-import { server } from "@server";
+import { ACTION_TYPE } from './action-type';
+import { request } from '@helpers';
 
-export const logout = (session) => {
-	server.logout(session);
+export const logout = () => {
+	request('/logout', 'POST');
 
 	return {
 		type: ACTION_TYPE.LOGOUT,

@@ -15,7 +15,6 @@ export * from './back-arrow/back-arrow';
 export * from './user-form/user-form';
 export * from './modal/modal';
 export * from './page-component/page-component';
-export * from './timer/timer';
 export * from './search/search';
 export * from './loader/loader';
 export * from './pagination/pagination';

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input, AuthFormError, StyledLink, H2, PageComponent } from '@components';
-import { useServerRequest } from '@hooks';
+import { request } from '@helpers';
 import { authSchema } from '@schemas';
 import { setUser } from '@actions';
 import { selectUserRole } from '@selectors';
@@ -30,7 +30,6 @@ const AuthorizationContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const roleId = useSelector(selectUserRole);
 	const submitButtonRef = useRef(null);
-	const requestServer = useServerRequest();
 
 	const focusSubmitButton = () => {
 		if (isValid && submitButtonRef.current) {
@@ -39,14 +38,14 @@ const AuthorizationContainer = ({ className }) => {
 	};
 
 	const onSubmit = ({ email, password }) => {
-		requestServer('authorize', email, password).then(({ error, res }) => {
+		request('/login', 'POST', { email, password }).then(({ error, user }) => {
 			if (error) {
 				setServerError(`Ошибка запроса: ${error}`);
 				return;
 			}
 
-			dispatch(setUser(res));
-			sessionStorage.setItem('userData', JSON.stringify(res));
+			dispatch(setUser(user));
+			sessionStorage.setItem('userData', JSON.stringify(user));
 		});
 
 		reset({

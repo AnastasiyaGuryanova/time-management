@@ -5,28 +5,28 @@ import PropTypes from 'prop-types';
 import { H2, Select, Button, Loader } from '@components';
 import { selectTasksAllProjects } from '@selectors';
 import { loadTasksAllProjectsAsync } from '@actions';
-import { useServerRequest } from '@hooks';
 import { durationToHoursAndMinutes } from '@helpers';
 import styled from 'styled-components';
 
 const SelectionContainer = ({ className }) => {
 	const dispatch = useDispatch();
-	const requestServer = useServerRequest();
 	const tasks = useSelector(selectTasksAllProjects);
 
 	const navigate = useNavigate();
 
 	const [selectedTaskId, setSelectedTaskId] = useState('');
+	const [selectedProjectId, setSelectedProjectId] = useState('');
 	const [selectedTaskName, setSelectedTaskName] = useState('');
 
 	useEffect(() => {
-		dispatch(loadTasksAllProjectsAsync(requestServer));
-	}, [dispatch, requestServer]);
+		dispatch(loadTasksAllProjectsAsync());
+	}, [dispatch]);
 
 	const handleTaskChange = (event) => {
 		const selectedTask = tasks.find((task) => task.id === event.target.value);
 
 		setSelectedTaskId(selectedTask.id);
+		setSelectedProjectId(selectedTask.projectId);
 		setSelectedTaskName(selectedTask.taskText);
 	};
 
@@ -56,6 +56,7 @@ const SelectionContainer = ({ className }) => {
 					navigate(`/start/task/${selectedTaskId}`, {
 						state: {
 							taskName: selectedTaskName,
+							projectId: selectedProjectId,
 						},
 					})
 				}

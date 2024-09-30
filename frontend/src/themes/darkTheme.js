@@ -1,5 +1,6 @@
 export const darkTheme = {
 	colors: {
+		id: 'dark',
 		headerFooterBackground: '#393939',
 		headerFooterText: '#808080',
 		headerFooterShadow: '#393939',

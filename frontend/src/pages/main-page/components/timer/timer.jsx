@@ -1,54 +1,24 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useTimer, useServerRequest } from '@hooks';
+import { useTimer } from '@hooks';
+import { getCurrentDateTime } from '@helpers';
 import { saveTaskAsync } from '@actions';
 import { Tooltip, Icon, H2, PageComponent } from '@components';
+import { TimerCard, TimerDisplay, ButtonContainer } from './components';
 import styled from 'styled-components';
 
-const TimerCard = styled.div`
-	width: 50px;
-	height: 70px;
-	background-color: ${(props) => props.theme.colors.timerCardBackground};
-	border-radius: 8px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 2em;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	margin: 0 5px;
-	transition: transform 0.5s;
-
-	&:hover {
-		transform: scale(1.1);
-	}
-`;
-
-const TimerDisplay = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 20px 0;
-`;
-
-const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-`;
-
-const TimerContainer = ({ className, taskId, taskName }) => {
+const TimerContainer = ({ className, taskId, projectId, taskName }) => {
 	const { isRunning, start, stop, reset, duration, startTime } = useTimer();
-	const requestServer = useServerRequest();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const onSave = () => {
 		if (duration > 0) {
 			dispatch(
-				saveTaskAsync(requestServer, {
-					id: taskId,
+				saveTaskAsync(projectId, taskId, {
 					startTime,
+					endTime: getCurrentDateTime(),
 					duration: Number(duration),
 				}),
 			).then(() => navigate(`/`));
@@ -126,5 +96,6 @@ export const Timer = styled(TimerContainer)`
 TimerContainer.propTypes = {
 	className: PropTypes.string,
 	taskId: PropTypes.string.isRequired,
+	projectId: PropTypes.string.isRequired,
 	taskName: PropTypes.string.isRequired,
 };

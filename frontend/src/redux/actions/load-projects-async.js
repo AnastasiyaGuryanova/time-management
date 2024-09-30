@@ -1,10 +1,10 @@
 import { setProjectsData } from './set-projects-data';
+import { request } from '@helpers';
 
-export const loadProjectsAsync = (requestServer) => (dispatch) => {
-	return requestServer('fetchProjects').then((projectsData) => {
-		if (projectsData.res) {
-			dispatch(setProjectsData(projectsData.res));
+export const loadProjectsAsync = () => (dispatch) =>
+	request('/projects', 'GET').then((projectsData) => {
+		if (projectsData.data) {
+			dispatch(setProjectsData(projectsData.data));
 		}
 		return projectsData;
 	});
-};

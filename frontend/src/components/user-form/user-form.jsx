@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
 import { Button, Input, AuthFormError, StyledLink } from '@components';
 import { setUser } from '@actions';
-import { useServerRequest } from '@hooks';
+import { request } from '@helpers';
+import { selectUserId } from '@selectors';
 import { registrationAndSettingsSchema } from '@schemas';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -30,8 +31,8 @@ const UserFormContainer = ({
 	const [serverError, setServerError] = useState(null);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const requestServer = useServerRequest();
 	const submitButtonRef = useRef(null);
+	const userId = useSelector(selectUserId);
 
 	const focusSubmitButton = () => {
 		if (isValid && submitButtonRef.current) {
@@ -41,15 +42,30 @@ const UserFormContainer = ({
 
 	const onSubmit = async (data) => {
 		const { name, email, password } = data;
-		const { error, res } = await requestServer('saveUser', name, email, password);
-		if (error) {
-			setServerError(`Ошибка запроса: ${error}`);
-			return;
-		}
 
-		dispatch(setUser(res));
-		if (onSuccess) onSuccess();
-		reset();
+		if (isEdit) {
+			request(`/user/${userId}`, 'PATCH', { name, email, password }).then(
+				({ data }) => {
+					console.log(data);
+
+					dispatch(setUser(data));
+					onSuccess();
+					reset();
+				},
+			);
+		} else {
+			request('/register', 'POST', { name, email, password }).then(
+				({ error, user }) => {
+					if (error) {
+						setServerError(error);
+						return;
+					}
+
+					dispatch(setUser(user));
+					reset();
+				},
+			);
+		}
 	};
 
 	const formError =

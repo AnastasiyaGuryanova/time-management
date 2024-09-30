@@ -11,11 +11,11 @@ const ThemeSwitcherContainer = ({ className }) => {
 		<div className={className}>
 			<h3>
 				Сменить тему профиля на{' '}
-				{currentTheme === byВefaultTheme ? 'тёмную' : 'светлую'}
+				{currentTheme.colors.id === 'default' ? 'тёмную' : 'светлую'}
 			</h3>
 			<div className="container" onClick={toggleTheme}>
 				<div className="switch">
-					{currentTheme === byВefaultTheme ? (
+					{currentTheme.colors.id === 'default' ? (
 						<Icon id="fa-sun-o" size="32px" margin="1px 0 3px 0" />
 					) : (
 						<Icon id="fa-moon-o" size="32px" margin="1px 0 3px 0" />

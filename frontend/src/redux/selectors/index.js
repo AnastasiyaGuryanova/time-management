@@ -10,3 +10,4 @@ export * from './select-modal-is-open';
 export * from './select-modal-on-cancel';
 export * from './select-modal-on-confirm';
 export * from './select-modal-children';
+export * from './select-user-id';

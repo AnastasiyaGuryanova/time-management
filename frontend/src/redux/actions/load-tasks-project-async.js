@@ -1,13 +1,11 @@
-import { setTasksProject } from "./set-tasks-project";
+import { setTasksProject } from './set-tasks-project';
+import { request } from '@helpers';
 
-export const loadTasksProjectAsync =
-	(requestServer, projectId) => (dispatch) => {
-		return requestServer("fetchTasksProject", projectId).then(
-			(response) => {
-				if (response.res) {
-					dispatch(setTasksProject(response.res));
-				}
-				return response;
-			},
-		);
-	};
+export const loadTasksProjectAsync = (projectId) => (dispatch) =>
+	request(`/projects/${projectId}/task`, 'GET').then((response) => {
+		if (response.data) {
+			dispatch(setTasksProject(response.data));
+		}
+
+		return response;
+	});

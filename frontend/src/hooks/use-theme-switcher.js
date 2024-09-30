@@ -8,7 +8,8 @@ export const useThemeSwitcher = () => {
 	const currentTheme = useSelector(selectTheme);
 
 	const toggleTheme = () => {
-		const newTheme = currentTheme === byВefaultTheme ? darkTheme : byВefaultTheme;
+		const newTheme =
+			currentTheme.colors.id === 'default' ? darkTheme : byВefaultTheme;
 
 		dispatch(setTheme(newTheme));
 

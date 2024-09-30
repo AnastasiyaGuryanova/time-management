@@ -4,14 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Input } from '@components';
 import { saveProjectAsync } from '@actions';
-import { useServerRequest } from '@hooks';
 import { sanitizeContent } from './utils';
 import styled from 'styled-components';
 
 const ProjectFormContainer = ({ project: { id, title, description }, className }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const requestServer = useServerRequest();
 
 	const [titleValue, setTitleValue] = useState(title || '');
 	const descriptionRef = useRef(null);
@@ -29,8 +27,7 @@ const ProjectFormContainer = ({ project: { id, title, description }, className }
 
 		if (titleValue && newDescription) {
 			dispatch(
-				saveProjectAsync(requestServer, {
-					id,
+				saveProjectAsync(id, {
 					title: titleValue,
 					description: newDescription,
 				}),
