@@ -1,4 +1,5 @@
 import { Bar } from 'react-chartjs-2';
+import { durationToHoursAndMinutes } from '@helpers';
 import PropTypes from 'prop-types';
 
 export const TimeSpentBarChart = ({ data }) => {
@@ -7,13 +8,26 @@ export const TimeSpentBarChart = ({ data }) => {
 		datasets: [
 			{
 				label: 'Время, затраченное на проект (часы)',
-				data: data.map((item) => item.duration / 3600),
+				data: data.map((item) => item.duration),
 				backgroundColor: 'rgba(75, 192, 192, 0.75)',
 			},
 		],
 	};
 
-	return <Bar data={chartData} />;
+	const options = {
+		plugins: {
+			tooltip: {
+				callbacks: {
+					label: function (context) {
+						const durationInSeconds = context.raw;
+						return durationToHoursAndMinutes(durationInSeconds);
+					},
+				},
+			},
+		},
+	};
+
+	return <Bar data={chartData} options={options} />;
 };
 
 TimeSpentBarChart.propTypes = {
