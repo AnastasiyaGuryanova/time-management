@@ -25,6 +25,16 @@ export const TimeSpentBarChart = ({ data }) => {
 				},
 			},
 		},
+		scales: {
+			y: {
+				ticks: {
+					callback: function (value) {
+						const hours = Math.floor(value / 3600);
+						return `${hours} ч`;
+					},
+				},
+			},
+		},
 	};
 
 	return <Bar data={chartData} options={options} />;
