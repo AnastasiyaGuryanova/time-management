@@ -60,7 +60,7 @@ export const ThemeSwitcher = styled(ThemeSwitcherContainer)`
 
 		transition: justify-content 0.3s ease;
 		justify-content: ${({ theme }) =>
-			theme === byВefaultTheme ? 'flex-start' : 'flex-end'};
+			theme.colors.id === 'default' ? 'flex-start' : 'flex-end'};
 	}
 `;
 
