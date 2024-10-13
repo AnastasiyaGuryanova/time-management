@@ -46,8 +46,6 @@ const UserFormContainer = ({
 		if (isEdit) {
 			request(`/user/${userId}`, 'PATCH', { name, email, password }).then(
 				({ data }) => {
-					console.log(data);
-
 					dispatch(setUser(data));
 					onSuccess();
 					reset();
