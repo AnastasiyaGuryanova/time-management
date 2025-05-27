@@ -8,7 +8,6 @@ export default defineConfig({
 		alias: {
 			'@utils': '/src/bff/utils',
 			'@operation': '/src/bff/operation',
-			'@server': '/src/bff/server.js',
 			'@app': '/src/app.jsx',
 			'@components': '/src/components',
 			'@actions': '/src/redux/actions',
